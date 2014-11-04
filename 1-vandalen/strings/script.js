@@ -2,37 +2,31 @@
 
 window.onload = function(){
 
-	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
-		// Plats för förändring.		
-		// Returnera den konverterade strängen.
-		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
 
-		var newstr; // = str.replace(/a/gi, "#");
-
+		var newStr = ""; 
+		
+		// Om användaren inte skriver något. 		
+		if(str === ""){
+			return "Fel! Du måste mata in en textsträng.";
+		}
+		
+		// Ersätter bokstäverna en och en. 
 		for(var i = 0; i < str.length; i+=1){
-			
+
 			if(str[i] === str[i].toLowerCase()){
-				str[i] += str[i].toUpperCase(); 
+				newStr += str[i].toUpperCase(); 
 			}
 
 			if(str[i] === str[i].toUpperCase()){
-				str[i] += str[i].toLowerCase(); 
+				newStr += str[i].toLowerCase(); 
 			}
 		}
-		
 
-		
-	 	// var newstr = str.replace(/[a-ö]/g, function(s){
-		// return s.toUpperCase(); 
-		// }); 
-
-		return newstr; 
-
-
+		// Byter ut alla a:n mot # och returnerar den omgjorda strängen.
+		return newStr.replace(/a/gi, "#"); 
 	};
 	// ------------------------------------------------------------------------------
-
 
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
