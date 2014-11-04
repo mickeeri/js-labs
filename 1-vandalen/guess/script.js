@@ -3,41 +3,33 @@
 window.onload = function(){
 	
     var secret = 50; 
+    var numberOfGuesses = 1;
     
 	
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var guess = function (number) {
-	    console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
-	    console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
-
-	    // Plats för förändring.
-	    if(number > secret){
-	    	return[false, "Det hemliga talet är högre!"]; 
+	     
+	     if(number > 100 || number <= 0){
+	     	numberOfGuesses += 1; 
+	    	return[false, "Talet är utanför intervallet 0 - 100."];
 	    }
 
-	    if(number < secret){
-	    	return false; 
+	    else if(number > secret){
+	    	numberOfGuesses += 1; 
+	    	return[false, "Det hemliga talet är lägre!"]; 
 	    }
 
-	    if(number > 100 || number <= 0){
-	    	return false; 
+	    else if(number < secret){
+	    	numberOfGuesses += 1; 
+	    	return[false, "Det hemliga talet är högre!"];
 	    }
 
 	    else{
-	    	return[true, "Grattis! Det hemliga talet var " + secret + "."]; 
+	    	return[true, "Grattis! Det hemliga talet var " + secret + " och du behövde " + numberOfGuesses + " gissningar för att hitta det."]; 
 	    }
-
-
-	    // Returnera exempelvis: 
-	    // [true, "Grattis du vann! Det hemliga talet var X och du behövde Y gissningar för att hitta det."]
-	    // [false, "Det hemliga talet är högre!"]
-	    // [false, "Det hemliga talet är lägre!"]
-	    // [false, "Talet är utanför intervallet 0 - 100"]		
 	}; 
 	
 	// ------------------------------------------------------------------------------
-
-
 
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
