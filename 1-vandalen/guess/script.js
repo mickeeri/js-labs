@@ -2,7 +2,7 @@
 
 window.onload = function(){
 	
-    var secret = 50; 
+    var secret = Math.floor(Math.random() * 100 + 1); 
     var numberOfGuesses = 1;
     
 	
