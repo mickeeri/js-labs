@@ -7,9 +7,28 @@ window.onload = function(){
 		// Plats för förändring.		
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-	
-		var newstr = str.replace(/a/gi, "#");
+
+		var newstr; // = str.replace(/a/gi, "#");
+
+		for(var i = 0; i < str.length; i+=1){
+			
+			if(str[i] === str[i].toLowerCase()){
+				str[i] += str[i].toUpperCase(); 
+			}
+
+			if(str[i] === str[i].toUpperCase()){
+				str[i] += str[i].toLowerCase(); 
+			}
+		}
+		
+
+		
+	 	// var newstr = str.replace(/[a-ö]/g, function(s){
+		// return s.toUpperCase(); 
+		// }); 
+
 		return newstr; 
+
 
 	};
 	// ------------------------------------------------------------------------------
