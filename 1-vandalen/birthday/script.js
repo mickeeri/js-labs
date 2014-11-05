@@ -5,14 +5,20 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
+		// input is note a date object. 
+		var birthday = new Date(1988,10,15); 
+		date = birthday; 
+
 		// För att få det aktuella året. 
 		var now = new Date(); 
-		var year = now.getFullYear(); 
 
-		// Kod för att få nästa födelsdag. År, måndad, dag.
-		var nextBirthday = new Date(year, date.getMonth(), date.getDate()); 
+		// Kod för att få nästa födelsdag. 
+		var nextBirthday = new Date(now.getFullYear(), date.getMonth(), date.getDate(), 
+			now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
-
+		// Kod för att räkna ut tidsskillnaden mellan nuet och födelsedagen.
+		return (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
+		console.log((nextBirthday.getTime() - now.getTime())/(1000*3600)/24); 
 
 	};
 	// ------------------------------------------------------------------------------
