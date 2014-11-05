@@ -5,20 +5,34 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
-		// input is note a date object. 
-		var birthday = new Date(1988,10,15); 
-		date = birthday; 
+		// Omvandlar date till ett datum-objekt. 
+		var birthday = new Date(date); 
 
-		// För att få det aktuella året. 
+		// Den aktuella tiden. 
 		var now = new Date(); 
 
+		var currentYear = now.getFullYear(); 
+
+		console.log(currentYear); 
+
 		// Kod för att få nästa födelsdag. 
-		var nextBirthday = new Date(now.getFullYear(), date.getMonth(), date.getDate(), 
+		var nextBirthday = new Date(currentYear, birthday.getMonth(), birthday.getDate(), 
 			now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 
 		// Kod för att räkna ut tidsskillnaden mellan nuet och födelsedagen.
-		return (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
-		console.log((nextBirthday.getTime() - now.getTime())/(1000*3600)/24); 
+		
+		var daysUntilBirthday = (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
+
+		if(nextBirthday.getTime() < now.getTime())
+		{
+			return Math.floor(daysUntilBirthday + 365); 
+		}
+		else 
+		{
+			return daysUntilBirthday; 
+		}
+
+		// return (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
 
 	};
 	// ------------------------------------------------------------------------------
@@ -43,7 +57,7 @@ window.onload = function(){
 					break;
 				case 1: message = "Du fyller år imorgon!";
 					break;
-				default: message = "Du fyller år om " + answer + " dagar";
+				default: message = "Du fyller år om " + answer + " dagar.";
 					break;
 			}
 
