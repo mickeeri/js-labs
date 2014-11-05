@@ -5,10 +5,12 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
+		// För att få det aktuella året. 
+		var now = new Date(); 
+		var year = now.getFullYear(); 
 
-
-			// Din kod här.
-
+		// Kod för att få nästa födelsdag. År, måndad, dag.
+		var nextBirthday = new Date(year, date.getMonth(), date.getDate()); 
 
 
 
@@ -28,7 +30,7 @@ window.onload = function(){
 		p.classList.remove( "error");
 
 		try {
-			var answer = birthday(input.value) // Läser in texten från textrutan och skickar till funktionen "convertString"
+			var answer = birthday(input.value); // Läser in texten från textrutan och skickar till funktionen "convertString"
 			var message;
 			switch (answer){
 				case 0: message = "Grattis på födelsedagen!";
