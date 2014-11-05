@@ -4,36 +4,44 @@ window.onload = function(){
 
 	
 	var birthday = function(date){
-		
+
 		// Omvandlar date till ett datum-objekt. 
 		var birthday = new Date(date); 
+
+		console.log(date); 
+
+		if(birthday == "Invalid Date"){
+			throw new Error("Fel! Du måste ange ett datum."); 
+		}
 
 		// Den aktuella tiden. 
 		var now = new Date(); 
 
-		var currentYear = now.getFullYear(); 
-
-		console.log(currentYear); 
-
 		// Kod för att få nästa födelsdag. 
-		var nextBirthday = new Date(currentYear, birthday.getMonth(), birthday.getDate(), 
-			now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+		var nextBirthday = new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate()); 
 
-		// Kod för att räkna ut tidsskillnaden mellan nuet och födelsedagen.
-		
+		// Kod för att räkna ut tidsskillnaden mellan nuet och födelsedagen.	
 		var daysUntilBirthday = (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
 
-		if(nextBirthday.getTime() < now.getTime())
-		{
-			return Math.floor(daysUntilBirthday + 365); 
+		daysUntilBirthday = Math.ceil(daysUntilBirthday); 
+		console.log(daysUntilBirthday); 
+
+		// Om födelsedagen redan har varit: lägg till ett år. 
+		if(daysUntilBirthday < 0){
+
+			// Om nästa år är skottår. 
+			if((nextBirthday.getFullYear() + 1) % 4 === 0){
+				return (daysUntilBirthday + 366);
+			}
+			else {
+				return (daysUntilBirthday + 365);
+			}			
 		}
-		else 
-		{
-			return daysUntilBirthday; 
+		else {
+			return (daysUntilBirthday); 
 		}
 
-		// return (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
-
+		// if(nextBirthday.getTime() < now.getTime()){
 	};
 	// ------------------------------------------------------------------------------
 
