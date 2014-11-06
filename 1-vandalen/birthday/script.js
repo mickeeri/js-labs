@@ -1,50 +1,40 @@
 "use strict";
 
 window.onload = function(){
-
 	
 	var birthday = function(date){
 
-		// Omvandlar date till ett datum-objekt. 
-		var birthday = new Date(date); 
-
-		console.log(date); 
-
-		if(birthday == "Invalid Date"){
-			throw new Error("Fel! Du måste ange ett datum."); 
+		// Omvandlar date till ett datumobjekt. 
+		var answer = new Date(date); 
+		
+		if(answer == "Invalid Date" || date === ""){
+			throw new Error("Fel! Du måste ange ett datum i formatet YYYY-MM-DD"); 
 		}
+
+		console.log(answer + " answer."); 
 
 		// Den aktuella tiden. 
-		var now = new Date(); 
+		var now = new Date();
 
-		// Kod för att få nästa födelsdag. 
-		var nextBirthday = new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate()); 
+		// Skapar ett nytt datumobjekt med exakt samma tid som now, förutom månad och dag, 
+		// vilket fås från användarens svar.
+		var nextBirthday = new Date(now.getFullYear(), answer.getMonth(), answer.getDate(), 
+			now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()); 
 
-		// Kod för att räkna ut tidsskillnaden mellan nuet och födelsedagen.	
+		console.log(nextBirthday + " nextBirthday."); 
+
+		// Om födelsedagen redan har varit: öka året med 1.  
+		if (nextBirthday.getTime() < now.getTime()){
+			nextBirthday.setFullYear(nextBirthday.getFullYear() + 1); 
+		}
+
+		// Kod för att räkna ut tidsskillnaden mellan nuet och födelsedagen i dagar.	
 		var daysUntilBirthday = (nextBirthday.getTime() - now.getTime())/(1000*3600)/24;
 
-		daysUntilBirthday = Math.ceil(daysUntilBirthday); 
 		console.log(daysUntilBirthday); 
-
-		// Om födelsedagen redan har varit: lägg till ett år. 
-		if(daysUntilBirthday < 0){
-
-			// Om nästa år är skottår. 
-			if((nextBirthday.getFullYear() + 1) % 4 === 0){
-				return (daysUntilBirthday + 366);
-			}
-			else {
-				return (daysUntilBirthday + 365);
-			}			
-		}
-		else {
-			return (daysUntilBirthday); 
-		}
-
-		// if(nextBirthday.getTime() < now.getTime()){
+		return Math.ceil(daysUntilBirthday);
 	};
 	// ------------------------------------------------------------------------------
-
 
 	// Kod för att hantera utskrift och inmatning. Denna ska du inte behöva förändra
 	var p = document.querySelector("#value"); // Referens till DOM-noden med id="#value"
@@ -74,9 +64,5 @@ window.onload = function(){
 			p.classList.add( "error"); // Växla CSS-klass, IE10+
 			p.innerHTML = error.message;
 		}
-	
 	});
-
-
-
 };
