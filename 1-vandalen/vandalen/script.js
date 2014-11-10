@@ -11,8 +11,10 @@ persArr.forEach(function (array, index){
 	nameArray[index] = array.name; 
 }); 
 
-// Sorterar den nya arrayen. 
-nameArray.sort(); 
+// Sorterar den nya arrayen. Använder String.localeCompare för att även inkludera svenska tecken. 
+nameArray = nameArray.sort(function (a, b){
+	return a.localeCompare(b); 
+}); 
 
 // Adderar dem till en sträng och lägger till i objektet. 
 persons.names = nameArray.reduce(function (a, b){
