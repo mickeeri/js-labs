@@ -5,8 +5,6 @@ window.onload = function(){
     var secret = Math.floor(Math.random() * 100 + 1); 
     var numberOfGuesses = 1;
     
-	
-	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var guess = function (number) {
 	     
 	     if(number > 100 || number <= 0){

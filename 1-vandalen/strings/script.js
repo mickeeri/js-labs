@@ -8,7 +8,7 @@ window.onload = function(){
 		
 		// Om användaren inte skriver något. 		
 		if(str === ""){
-			return "Fel! Du måste mata in en textsträng.";
+			throw new Error("Fel! Du måste mata in en textsträng.");
 		}
 		
 		// Ersätter bokstäverna en och en. 
