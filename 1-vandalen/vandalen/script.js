@@ -10,10 +10,21 @@ persArr.forEach(function (array, index){
 	nameArray[index] = array.name; 
 })
 
+// Sorterar den nya arrayen. 
 nameArray.sort(); 
 
+// Adderar dem till en sträng och lägger till i objektet. 
+persons.names = nameArray.reduce(function (a, b){
+	return a + ", " + b; 
+}); 
 
-	// Använd reduce för att lägga till värde från arrayen till nya objektet.
+// Skapar en array med bara nummer. 
+persArr.forEach(function (array, index){
+	
+})
+
+
+return persons; 
 
 };
 
