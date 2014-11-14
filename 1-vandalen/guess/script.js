@@ -8,12 +8,18 @@ window.onload = function(){
     
 	var guess = function (number) {
 	     
-	     number = +number; 
+	    number = +number; 
+
+	    if(isNaN(number)){
+	    	return [false, "Det angivna värdet är inte ett heltal."];
+	    }
 
 	     if(number > 100 || number <= 0){
 	     	numberOfGuesses += 1; 
 	    	return[false, "Talet är utanför intervallet 0 - 100."];
 	    }
+
+
 
 	    else if(number > secret){
 	    	numberOfGuesses += 1; 

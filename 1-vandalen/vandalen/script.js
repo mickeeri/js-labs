@@ -5,7 +5,7 @@ try{
 		var nameArray = []; 
 		var ageArray = []; 
 
-		// Skapar en ny array för bara namn. 
+		// Lägger till värden i array för bara namn. 
 		persArr.forEach(function (person, index){
 			nameArray[index] = person.name; 
 		}); 
@@ -20,7 +20,7 @@ try{
 			return a + ", " + b; 
 		}); 
 
-		// Skapar en array med bara nummer. 
+		// Lägger till värden i array med bara åldrar.  
 		persArr.forEach(function (person, index){
 			ageArray[index] = person.age; 
 		}); 
