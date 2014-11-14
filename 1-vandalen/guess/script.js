@@ -7,6 +7,9 @@ window.onload = function(){
     
 	var guess = function (number) {
 	     
+	     console.log(typeof number); 
+	     console.log(typeof secret); 
+
 	     if(number > 100 || number <= 0){
 	     	numberOfGuesses += 1; 
 	    	return[false, "Talet är utanför intervallet 0 - 100."];
@@ -22,7 +25,7 @@ window.onload = function(){
 	    	return[false, "Det hemliga talet är högre!"];
 	    }
 
-	    else{
+	    else if(number == secret){
 	    	return[true, "Grattis! Det hemliga talet var " + secret + " och du behövde " + numberOfGuesses + " gissningar för att hitta det."]; 
 	    }
 	}; 
