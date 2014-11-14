@@ -16,8 +16,8 @@ window.onload = function(){
 		// Den aktuella tiden. 
 		var now = new Date();
 
-		// Skapar ett nytt datumobjekt med exakt samma tid som now, förutom månad och dag, 
-		// vilket fås från användarens svar.
+		// Skapar ett nytt datumobjekt med exakt samma tid som now, förutom månad och dag
+		// som fås från answer. 
 		var nextBirthday = new Date(now.getFullYear(), answer.getMonth(), answer.getDate(), 
 			now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()); 
 

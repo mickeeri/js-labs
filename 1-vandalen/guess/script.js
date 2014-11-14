@@ -4,11 +4,11 @@ window.onload = function(){
 	
     var secret = Math.floor(Math.random() * 100 + 1); 
     var numberOfGuesses = 1;
+    console.log(secret);
     
 	var guess = function (number) {
 	     
-	     console.log(typeof number); 
-	     console.log(typeof secret); 
+	     number = +number; 
 
 	     if(number > 100 || number <= 0){
 	     	numberOfGuesses += 1; 
@@ -25,7 +25,7 @@ window.onload = function(){
 	    	return[false, "Det hemliga talet är högre!"];
 	    }
 
-	    else if(number == secret){
+	    else if(number === secret){
 	    	return[true, "Grattis! Det hemliga talet var " + secret + " och du behövde " + numberOfGuesses + " gissningar för att hitta det."]; 
 	    }
 	}; 

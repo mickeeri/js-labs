@@ -46,20 +46,19 @@ try{
 		}
 	}; 
 
-	var data = [{name: dada, age: 37}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}];
+	var data = [{name: "John Häggerud", age: 37}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}];
 
-	data.forEach(function(item){
-		if(typeof item.age !== "number" || typeof item.age === "undefined"){
-			throw new Error("FEL! Ålder måste anges som ett heltal."); 
-		}
+		data.forEach(function(item){
+			if(typeof item.name !== "string" || typeof item.name === "undefined"){
+				throw new Error("FEL! Namnet måste anges som en textsträng."); 
+			}
 
-		if(typeof item.name !== "string" || typeof item.name === "undefined"){
-			throw new Error("FEL! Namnet måste anges som en textsträng."); 
-		}
-	}); 
+			if(typeof item.age !== "number" || typeof item.age === "undefined"){
+				throw new Error("FEL! Ålder måste anges som ett heltal."); 
+			}
+		}); 
 
 	var result = makePerson(data);
-
 	console.log(result);
 }
 catch(error){
