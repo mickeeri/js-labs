@@ -19,8 +19,6 @@ window.onload = function(){
 	    	return[false, "Talet är utanför intervallet 0 - 100."];
 	    }
 
-
-
 	    else if(number > secret){
 	    	numberOfGuesses += 1; 
 	    	return[false, "Det hemliga talet är lägre!"]; 
