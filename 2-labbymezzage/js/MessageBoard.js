@@ -1,9 +1,11 @@
 "use strict"; 
 
 var MessageBoard = {
-	init:function(e){
+
+	messages: [], 
+	
+	init: function(){
 		// Array containing message-objects. 
-		var messages = []; 
 
 		// The users input into the textarea. 
 		var input = document.querySelector("#text"); 
@@ -18,16 +20,37 @@ var MessageBoard = {
 			// Create a new object with the input and the current time. 
 			var newMessage = new Message(input.value, new Date()); 
 
-			console.log(newMessage.toString());
-			console.log(newMessage.getText()); 
-			console.log(newMessage.getDate()); 
-
 			// Add newMessage to array. 
-			messages.push(newMessage); 
-
-			console.log(messages); 
-
+			MessageBoard.messages.push(newMessage); 
+			
+			MessageBoard.renderMessages(); 
 		});
+	},
+	
+	renderMessages: function(){
+		// Remove all messages. 
+		document.getElementById("messagearea").innerHTML = ""; 
+
+		// Renders all messages. 
+		for(var i = 0; i < MessageBoard.messages.length; ++i){
+			MessageBoard.renderMessage(i); 
+		}
+	},
+
+	renderMessage: function(messageID){
+		var div = document.querySelector("#messagearea");
+
+		var text = document.createElement("p");
+		text.innerHTML = MessageBoard.messages[messageID].getHTMLText();
+		div.appendChild(text);
+	}
+}; 
+
+	
+window.onload = MessageBoard.init; 
+
+
+
 
 
 
@@ -41,15 +64,6 @@ var MessageBoard = {
 		// alert(mess.getText()); 
 		// mess.setText("En annan text"); 
 		// alert(mess); 
-	}
-
-}; 
-
-	
-window.onload = MessageBoard.init; 
-
-
-
 
 
 
