@@ -1,26 +1,39 @@
 "use strict"; 
 
 var MessageBoard = {
-
-	// var messages: []; 
-
-
-
-
 	init:function(e){
-		var newMessage = document.querySelector("#messages p")
+		// Array containing message-objects. 
+		var messages = []; 
+
+		// The users input into the textarea. 
 		var input = document.querySelector("#text"); 
-		var submit = document.querySelector("#send");  
-		
+
+		// Submit-button. 
+		var submit = document.querySelector("#send");
+
+		// Event tied to the submit-button. 
 		submit.addEventListener("click", function(e){
-		e.preventDefault(); // Hindra att formuläret skickas till servern. 
+			e.preventDefault(); 
 
-		newMessage.classList.remove("error");
+			// Create a new object with the input and the current time. 
+			var newMessage = new Message(input.value, new Date()); 
 
-		var mess = new Message(input.value, new Date());
+			console.log(newMessage.toString());
+			console.log(newMessage.getText()); 
+			console.log(newMessage.getDate()); 
 
-		newMessage.innerHTML = mess; 
-	}); 
+			// Add newMessage to array. 
+			messages.push(newMessage); 
+
+			console.log(messages); 
+
+		});
+
+
+
+
+		// p.classList.remove("error");
+
 
 
 		// var mess = new Message("Testmeddelande", new Date()); 

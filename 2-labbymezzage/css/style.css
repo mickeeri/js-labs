@@ -36,6 +36,7 @@ textarea{
 	outline: none; 
 	overflow: auto; 
 	font: 400 16px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
+	border: 1px solid black;
 }
 
 textarea:focus{
