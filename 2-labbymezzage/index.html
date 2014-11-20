@@ -11,21 +11,19 @@
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 	</head>
 		<body>
-			<div id="container">
-				<header>
-					<h1>Labby Mezzage</h1>
-				</header>
-				
-				<main>
-					<form>		
-						<textarea placeholder="Skriv ditt meddelande här..." rows="5" cols="40" id="text"></textarea>
- 						<input id="send" type="submit" value="Skriv"/> 
-					</form>
-				</main>
+			<header>
+				<h1>Labby Mezzage</h1>
+			</header>
+			
+			<main>
+				<div id="messages">
+					<p class="message">Detta är första meddelandet.</p>				
+				</div>
 
-<!-- 				<footer>
-					<p>Av Mikael Eriksson</p>
-				</footer> -->
-			</div>			
+				<form>		
+					<textarea placeholder="Skriv ditt meddelande här..." id="text"></textarea>
+					<input id="send" type="submit" value="Skriv"/> 
+				</form>
+			</main>
 		</body>
 </html>
