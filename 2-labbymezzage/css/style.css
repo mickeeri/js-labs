@@ -1,0 +1,59 @@
+body{
+	background: #161616;
+	margin: 0; 
+}
+
+header{
+	width: 500px; 
+	text-align: center;
+	margin: 0 auto;
+}
+
+form {
+	text-align: center;
+	margin: 0 auto; 
+}
+
+main{
+	background: white; 
+	max-width: 500px;
+	height: 300px;  
+	margin: 0 auto;
+	padding: 50px 10px;  
+	border: 2px solid #89837A; 
+}
+
+header h1{
+	color: #FE7800; 
+	font: 400 60px/1.3 "Bree Serif", Georgia, serif;
+}
+
+p{
+	font: 400 14px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
+}
+
+textarea{
+	resize: none;
+	width: 490px; 
+	height: 160px; 
+	margin: 0 auto; 
+	outline: none; 
+	overflow: auto; 
+	font: 400 14px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
+/*	border: 3px solid #cccccc;*/
+
+}
+
+textarea:focus{
+	background: #F1F1F1;
+}
+
+input{
+	float: right;
+}
+
+
+
+
+
+
