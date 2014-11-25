@@ -29,5 +29,10 @@ Message.prototype.getHTMLText = function(){
 };
 
 Message.prototype.getDateText = function(){
+	var time = this.getDate(); 
+	var monthNumber = time.getMonth(); 
 
+	var months = ["januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december"];
+
+	return "Inlägget skapades den " + time.getDate() + " " + months[monthNumber] + " klockan " + time.toLocaleTimeString() + "."; 
 };
