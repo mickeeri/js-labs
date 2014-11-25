@@ -1,6 +1,7 @@
 body{
 	background: #161616;
 	margin: 0; 
+	font: 400 16px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
 }
 
 header{
@@ -11,10 +12,10 @@ header{
 
 form {
 	text-align: center;
-	margin: 0 auto; 
+	/*margin: 0 auto; */
 }
 
-main{
+#main{
 	background: white; 
 	max-width: 500px;
 	margin: 0 auto;
@@ -31,11 +32,11 @@ textarea{
 	resize: none;
 	width: 490px;
 	height: 160px; 
-	margin: 0 auto; 
+	/*margin: 0 auto;*/ 
 	outline: none; 
 	overflow: auto; 
 	font: 400 16px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
-	border: 1px solid black;
+	border: 1px solid #89837A; 
 }
 
 textarea:focus{
@@ -44,8 +45,10 @@ textarea:focus{
 
 input{
 	float: right;
-	font: 400 14px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .3);
+	font-size: 14px; 
+	margin-top: 1px; 
+	margin-right: 2px; 
 }
 
 #messagearea {
@@ -68,24 +71,29 @@ img {
 }
 
 p.timestamp {
-	font: 400 10px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
+	font-size: 10px; 
 	margin: 0 8px 2px 0;
 	padding-left: 446px; 
 	clear: both;
 
 }
 
-.message {
-	border: 1px solid black; 
-}
-
 .text{
 	width: 434px; 
 	margin: 2px 0 0 5px; 
 	word-wrap: break-word;
-	font: 400 16px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
 	float: left;
 
+}
+
+#counter {
+	float: right;
+	margin: 10px 4px 10px;
+	font-size: 12px; 
+}
+
+#clearfix {
+	clear: both;
 }
 
 

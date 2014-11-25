@@ -2,45 +2,67 @@
 
 var MessageBoard = {
 
+	// Array containing message-objects. 
 	messages: [], 
 	
 	init: function(){
-		// Array containing message-objects. 
 
-		// The users input into the textarea. 
-		var input = document.querySelector("#text"); 
-
-		// Submit-button. 
+		// Text-area and submit-button. 
 		var submit = document.querySelector("#send");
+		var input = document.querySelector("#text"); 
+		
+		// If the user presses Enter. 
+		input.addEventListener("keypress", function(e){
+
+			if(e.keyCode === 13 && event.shiftKey === false){
+				MessageBoard.submitMessage(); 
+				e.preventDefault(); 
+				input.value = ""; 
+			}
+		});
 
 		// Event tied to the submit-button. 
 		submit.addEventListener("click", function(e){
 			e.preventDefault(); // Prevent from sending. 
-
-			// Create a new object with the input and the current time. 
-			var newMessage = new Message(input.value, new Date()); 
-
-			// Add newMessage to array. 
-			MessageBoard.messages.push(newMessage); 
-			
-			MessageBoard.renderMessages(); 
-			MessageBoard.countMessage(); 
+			MessageBoard.submitMessage(); 
+			input.value = ""; 
 		});
+	},
+
+	submitMessage: function(){
+		var input = document.querySelector("#text"); 
+
+		// Create a new object with the input and the current time. 
+		var newMessage = new Message(input.value, new Date()); 
+
+		// Add newMessage to array. 
+		MessageBoard.messages.push(newMessage);
+		
+		// Call function that renders messages.
+		MessageBoard.renderMessages(); 
+
+		// Call function that counts length of array. 
+		MessageBoard.countMessage();
 	},
 	
 	renderMessages: function(){
 		document.getElementById("messagearea").innerHTML = ""; 
 
-		// Renders all messages. 
-		for(var i = 0; i < MessageBoard.messages.length; ++i){
+		// Renders all messages. 	
+		MessageBoard.messages.forEach(function(message, i){
 			MessageBoard.renderMessage(i); 
-		}
+		}); 
+
+		// for(var i = 0; i < MessageBoard.messages.length; ++i){
+		// 	MessageBoard.renderMessage(i); 
+		// }
 	},
 
 	removeMessage: function(messageID){
-		// Radera aktuellt meddelande från arrayen. Rendera alla meddelanden igen. 
+		// Removes message from array. 
 		MessageBoard.messages.splice(messageID, 1);  
 
+		// Then calls the render messages function to write the values that are left. 
 		MessageBoard.renderMessages(); 
 		MessageBoard.countMessage(); 
 	},
@@ -67,6 +89,15 @@ var MessageBoard = {
 		timeButton.setAttribute("src", "icons/timebutton.png");
 		timeButton.setAttribute("alt", "Visa meddelandets tidpunkt");
 
+		// Change image on mouseover. 
+		timeButton.addEventListener("mouseover", function(e){
+			e.target.setAttribute("src", "icons/timebutton_grey.png"); 
+		});
+
+		timeButton.addEventListener("mouseout", function(e){
+		e.target.setAttribute("src", "icons/timebutton.png"); 
+		});
+
 		var aTime = document.createElement("a");
 		aTime.setAttribute("href", "#"); 
 		messageDiv.appendChild(aTime);
@@ -80,6 +111,15 @@ var MessageBoard = {
 		var removeButton = document.createElement("img"); 
 		removeButton.setAttribute("src", "icons/remove.png");
 		removeButton.setAttribute("alt", "Ta bort meddelande");
+
+		// Change image on mousover. 
+		removeButton.addEventListener("mouseover", function(e){
+			e.target.setAttribute("src", "icons/delete_grey.png"); 
+		});
+
+		removeButton.addEventListener("mouseout", function(e){
+			e.target.setAttribute("src", "icons/remove.png"); 
+		});
 
 		var aRemove = document.createElement("a");
 		aRemove.setAttribute("href", "#"); 
@@ -99,17 +139,11 @@ var MessageBoard = {
 		messageDiv.appendChild(timeStamp); 
 	},
 
+	// Function that displays "Antal meddelanden".
 	countMessage: function(){
 		var pCounter = document.getElementById("counter"); 
 
 		pCounter.innerHTML = "Antal meddelanden: " + MessageBoard.messages.length;
-
-
-		// var numberOfMessages = document.createElement("p"); 
-
-		// numberOfMessages.innerHTML = "<p>Antal meddelanden: </p>" + MessageBoard.messages.length; 
-
-		// divCounter.appendChild(numberOfMessages);
 	}
 }; 
 
@@ -118,19 +152,7 @@ window.onload = MessageBoard.init;
 
 
 
-
-
-
-
-		// p.classList.remove("error");
-
-
-
-		// var mess = new Message("Testmeddelande", new Date()); 
-		// alert(mess); 
-		// alert(mess.getText()); 
-		// mess.setText("En annan text"); 
-		// alert(mess); 
+// mess.setText("En annan text"); 
 
 
 
