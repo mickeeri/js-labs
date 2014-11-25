@@ -24,6 +24,7 @@ var MessageBoard = {
 			MessageBoard.messages.push(newMessage); 
 			
 			MessageBoard.renderMessages(); 
+			MessageBoard.countMessage(); 
 		});
 	},
 	
@@ -41,23 +42,34 @@ var MessageBoard = {
 		MessageBoard.messages.splice(messageID, 1);  
 
 		MessageBoard.renderMessages(); 
+		MessageBoard.countMessage(); 
 	},
 
 	renderMessage: function(messageID){
+		
 		var div = document.querySelector("#messagearea");
 
+		// Container for all messages. 
+		var messageDiv = document.createElement("div"); 
+		
+		// Container for single message. 
+		messageDiv.setAttribute("class", "message"); 
+
+		// The message itself. 
 		var text = document.createElement("p");
+		text.setAttribute("class", "text");
 		text.innerHTML = MessageBoard.messages[messageID].getHTMLText();
-		div.appendChild(text);
+		div.appendChild(messageDiv);
+		messageDiv.appendChild(text); 
 
 		// Add button that displays time. 
 		var timeButton = document.createElement("img");
-		timeButton.setAttribute("src", "icons/timebutton.png")
-		timeButton.setAttribute("alt", "Visa meddelandets tidpunkt")
+		timeButton.setAttribute("src", "icons/timebutton.png");
+		timeButton.setAttribute("alt", "Visa meddelandets tidpunkt");
 
 		var aTime = document.createElement("a");
 		aTime.setAttribute("href", "#"); 
-		text.appendChild(aTime);
+		messageDiv.appendChild(aTime);
 		aTime.appendChild(timeButton);
 
 		aTime.addEventListener("click", function(){
@@ -71,7 +83,7 @@ var MessageBoard = {
 
 		var aRemove = document.createElement("a");
 		aRemove.setAttribute("href", "#"); 
-		text.appendChild(aRemove);
+		messageDiv.appendChild(aRemove);
 		aRemove.appendChild(removeButton); 
 
 		aRemove.addEventListener("click", function(){
@@ -79,6 +91,25 @@ var MessageBoard = {
 				MessageBoard.removeMessage(messageID); 
 			}
 		});
+
+		// Time stamp
+		var timeStamp = document.createElement("p"); 
+		timeStamp.setAttribute("class", "timestamp"); 
+		timeStamp.innerHTML = MessageBoard.messages[messageID].getDate().toLocaleTimeString(); 
+		messageDiv.appendChild(timeStamp); 
+	},
+
+	countMessage: function(){
+		var pCounter = document.getElementById("counter"); 
+
+		pCounter.innerHTML = "Antal meddelanden: " + MessageBoard.messages.length;
+
+
+		// var numberOfMessages = document.createElement("p"); 
+
+		// numberOfMessages.innerHTML = "<p>Antal meddelanden: </p>" + MessageBoard.messages.length; 
+
+		// divCounter.appendChild(numberOfMessages);
 	}
 }; 
 
