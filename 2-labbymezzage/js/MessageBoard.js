@@ -7,35 +7,42 @@ var MessageBoard = {
 	
 	init: function(){
 
-		// Text-area and submit-button. 
+		// Textarea and submit-button. 
 		var submit = document.querySelector("#send");
-		var input = document.querySelector("#text"); 
+		var textInput = document.querySelector("#text"); 
 		
 		// If the user presses Enter. 
-		input.addEventListener("keypress", function(e){
+		textInput.addEventListener("keypress", function(e){
 
-			if(e.keyCode === 13 && event.shiftKey === false){
-				MessageBoard.submitMessage(); 
+			if(e.keyCode === 13 && e.shiftKey === false && textInput.value !== ""){
+				MessageBoard.submitMessage(textInput); 
 				e.preventDefault(); 
-				input.value = ""; 
+				textInput.value = ""; 
 			}
+			else if(e.keyCode === 13 && e.shiftKey === false && textInput.value === ""){
+				e.preventDefault(); 
+			}
+			
 		});
 
 		// Event tied to the submit-button. 
 		submit.addEventListener("click", function(e){
-			e.preventDefault(); // Prevent from sending. 
-			MessageBoard.submitMessage(); 
-			input.value = ""; 
+			
+			if(textInput.value !== ""){
+				e.preventDefault(); // Prevent from sending. 
+				MessageBoard.submitMessage(textInput); 
+				textInput.value = ""; 
+			}
+			else if(textInput.value === ""){
+				e.preventDefault(); 
+			}
 		});
 	},
 
-	submitMessage: function(){
-		var input = document.querySelector("#text"); 
-
+	submitMessage: function(input){
 		// Create a new object with the input and the current time. 
 		var newMessage = new Message(input.value, new Date()); 
 
-		// Add newMessage to array. 
 		MessageBoard.messages.push(newMessage);
 		
 		// Call function that renders messages.
@@ -52,10 +59,6 @@ var MessageBoard = {
 		MessageBoard.messages.forEach(function(message, i){
 			MessageBoard.renderMessage(i); 
 		}); 
-
-		// for(var i = 0; i < MessageBoard.messages.length; ++i){
-		// 	MessageBoard.renderMessage(i); 
-		// }
 	},
 
 	removeMessage: function(messageID){
@@ -139,7 +142,7 @@ var MessageBoard = {
 		messageDiv.appendChild(timeStamp); 
 	},
 
-	// Function that displays "Antal meddelanden".
+	// Function that displays number of messages. 
 	countMessage: function(){
 		var pCounter = document.getElementById("counter"); 
 
@@ -147,12 +150,4 @@ var MessageBoard = {
 	}
 }; 
 
-	
 window.onload = MessageBoard.init; 
-
-
-
-// mess.setText("En annan text"); 
-
-
-
