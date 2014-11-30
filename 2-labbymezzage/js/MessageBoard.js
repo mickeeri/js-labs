@@ -55,7 +55,6 @@ var MessageBoard = {
 	renderMessages: function(){
 		document.getElementById("messagearea").innerHTML = ""; 
 
-		// Renders all messages. 	
 		MessageBoard.messages.forEach(function(message, i){
 			MessageBoard.renderMessage(i); 
 		}); 
