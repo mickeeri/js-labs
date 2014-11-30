@@ -1,24 +1,12 @@
 "use strict";
  
-var rows = 4; 
-var columns = 4; 
-var idCount = 0; 
-
-
-
-var pictureTable = function(){
+var pictureTable = function(rows, columns){
 
 	 var randomArray = RandomGenerator.getPictureArray(rows, columns); 
 
-	// var newArray = []; 
-	// newArray.push(randomArray); 
-	// console.log(randomArray); 
-
-	// console.log(newArray); 
-
-	// console.log(randomArray); 
-
 	var table = document.getElementById("memorytable"); 
+	var idCount = 0; 
+
 
 	// Rows
 	for(var i = 0; i < rows; i++){
@@ -50,10 +38,10 @@ var pictureTable = function(){
 		a.href = "#"; 
 		var defaultImg = document.createElement("img"); 
 		defaultImg.src = "pics/0.png"; 
+		
+		// Adds a diffrent id-number for each a-tag, that later represents index of random array. 
 		a.id = idCount; 
-
 		++idCount;
-
 
 		td.appendChild(a); 
 		a.appendChild(defaultImg); 
@@ -67,7 +55,6 @@ var pictureTable = function(){
 		
 		image.src = "pics/" + randomArray[a.getAttribute("id")] + ".png"; 
 		console.log(a); 
-
 	}
 
 }; 
@@ -77,6 +64,12 @@ var pictureTable = function(){
 
 window.onload = function(){
 
-	pictureTable(); 
+	var rows = 4; 
+	var columns = 4; 
+
+	pictureTable(rows, columns); 
+
+
+	// pictureTable(); 
 
 };
