@@ -2,6 +2,7 @@
 body {
 	background: white;
 	margin: 0;
+	font-family: 'Short Stack', cursive;
 }
 
 #container{
@@ -28,18 +29,29 @@ img{
 	height: 1.6em;
 }
 
-header footer{
-	background-color: #BE650E;
-	height: 20px;  
-	margin: 10px;
-}
-
 h1{
 	color: #BE650E;
 	text-align: center;
 	font-size: 4em;
 	margin: 20px;
-	text-shadow: 1px 1px rgba(0, 0, 0, .8);
-	font-family: 'Short Stack', cursive;
+	text-shadow: 1px 1px rgba(0, 0, 0, .9);
+	
 }
+
+p{
+	text-align: center; 
+	color: #BE650E;
+	text-shadow: 1px 1px rgba(0, 0, 0, .9);
+}
+
+#play {
+	text-align: center; 
+
+}
+
+input{
+	font-family: 'Short Stack', cursive;
+	font-size: 16px; 
+}
+
 

@@ -2,22 +2,14 @@
  
 var pictureTable = function(rows, columns){
 
-	var randomArray = RandomGenerator.getPictureArray(rows, columns); 
-
+	var randomArray = new RandomGenerator.getPictureArray(rows, columns); 	
 	var table = document.getElementById("memorytable"); 
 	var idCount = 0; 
-	var numberOfFlips = 2;
 	var numberOfTries = 0; 
-	var imagePair = [];  
-	var aPair = []; 
-	
+	var pictures = [];  
+	var numberOfPairs = (rows * columns)/2; 
 
 	createTable(); 
-
-	// function createTableRows{}
-	// for(var i = 0; i < rows; i++){
-	// 	createTable(); 
-	// }
 
 	// Columns
 	function createTable(){
@@ -44,65 +36,89 @@ var pictureTable = function(rows, columns){
 
 		var a = document.createElement("a"); 
 		a.href = "#"; 
-		var defaultImg = document.createElement("img"); 
-		defaultImg.src = "pics/0.png"; 
+		var defaultPic = document.createElement("img"); 
+		defaultPic.src = "pics/0.png"; 
 		
 		// Adds a diffrent id-number for each a-tag, that later represents index of random array. 
 		a.id = idCount; 
 		++idCount;
 
 		td.appendChild(a); 
-		a.appendChild(defaultImg); 
+		a.appendChild(defaultPic); 
 
-		FlipCard(a, defaultImg); 
+		new FlipCard(a, defaultPic); 
 				
 	} 
 
-	function FlipCard(a, image){
+	function FlipCard(a, picture){
 
-		a.onclick = function(){
-			image.src = "pics/" + randomArray[a.getAttribute("id")] + ".png";
+		a.addEventListener("click", function(e){
+
+			if(pictures.length < 2){
+				// Assign image id by array index and a-tag id.  
+				picture.src = "pics/" + randomArray[a.getAttribute("id")] + ".png";
 			
-			// To seperate and be able to compare two pictures I use an array. The array will never contain more than two pictures.    
-			imagePair.push(image);
-			// aPair.push(a); 
+				// To seperate and be able to compare two pictures I use an array. The array will never contain more than two pictures. 
+				if(pictures.length === 0){
+					pictures[0] = picture; 
+				}
+				// Checks if the user clicks the same link by comparing a-tag id. 
+				else if(e.currentTarget !== pictures[0].parentNode){
+					pictures[1] = picture; 
+				}
 
-			
-			console.log(imagePair);
+			}
+			if(pictures.length == 2){
 
-			// Ska inte gå att klicka på dessa bilder och fylla på arrayen ännu mer. Därför kanske skicka till annan funktion. Funktion i samma funktion?
-			if(imagePair.length == 2){
-				EvaluatePictures(imagePair); 
-				imagePair = []; 
+				numberOfTries += 1; 
+				document.getElementById("tries").innerHTML = "Antal försök: " + numberOfTries; 
+
+				if(pictures[0].src !== pictures[1].src){
+					setTimeout(function(){
+						// Resets pics to default img. 
+						pictures[0].src = "pics/0.png"; 
+						pictures[1].src = "pics/0.png"; 
+						pictures = []; 
+					}, 1000); 
+				}
+				else{
+					pictures = []; 
+					numberOfPairs -= 1; 
+
+					if(numberOfPairs === 0)
+					{
+						new PresentResult(); 
+					}
+				}
 			}	
-		}
+		});
+	}
 
-		function EvaluatePictures(images2){
-			console.log("Lalalala")
+	function PresentResult(){
+		document.getElementById("result").innerHTML = "Grattis! Spelet är slut. Du behövde " + numberOfTries + " försök för att lyckas.";
 
-			console.log(images2); 
-		}
+		var inputDiv = document.getElementById("play");
+		var playAgain = document.createElement("input"); 
+		playAgain.type = "button"; 
+		playAgain.value = "Spela igen"; 
+		inputDiv.appendChild(playAgain); 
+
+		playAgain.onclick = function(){
+			location.reload(true); 
+		}; 
+
+
 	}
 }; 
 
-// var rows = 3; 
-// var columns = 4; 
-
 window.onload = function(){
 
-	var rows = 4; 
-	var columns = 4; 
+	var rows = 2; 
+	var columns = 5; 
 
 	pictureTable(rows, columns); 
 
-
-	// pictureTable(); 
-
 };
 
-				// if(imagePair[0].src !== imagePair[1].src){
 
-				// 	setTimeout(function(){
-				// 		imagePair[0].src = "pics/0.png"; 
-				// 		imagePair[1].src = "pics/0.png"; 
-				// 	}, 1000); 
+
