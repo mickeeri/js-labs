@@ -2,37 +2,45 @@
  
 var pictureTable = function(rows, columns){
 
-	 var randomArray = RandomGenerator.getPictureArray(rows, columns); 
+	var randomArray = RandomGenerator.getPictureArray(rows, columns); 
 
 	var table = document.getElementById("memorytable"); 
 	var idCount = 0; 
+	var numberOfFlips = 2;
+	var numberOfTries = 0; 
+	var imagePair = [];  
+	var aPair = []; 
+	
 
+	createTable(); 
 
-	// Rows
-	for(var i = 0; i < rows; i++){
-		createTableColumns(); 
-	}
+	// function createTableRows{}
+	// for(var i = 0; i < rows; i++){
+	// 	createTable(); 
+	// }
 
 	// Columns
-	function createTableColumns(){
-	 	var tr = document.createElement("tr");
-		table.appendChild(tr); 
-		
-		for(var j = 0; j < columns; j++){
+	function createTable(){
+	 	
+		// Rows 
+		for(var i = 0; i < rows; i++){
+		 	
+		 	var tr = document.createElement("tr");
+			table.appendChild(tr); 
 			
-			var td = document.createElement("td"); 
-			// td.setAttribute("id", randomArray[idCount]); 
-		 
-			tr.appendChild(td); 
+			// Columns
+			for(var j = 0; j < columns; j++){
+				
+				var td = document.createElement("td"); 
+			 
+				tr.appendChild(td); 
 
-			createImageLink(td); 
-
-			// idCount++; 
+				createImageLink(td); 
+			}
 		}
 	}
 
 	function createImageLink(td){
-
 
 		var a = document.createElement("a"); 
 		a.href = "#"; 
@@ -46,17 +54,35 @@ var pictureTable = function(rows, columns){
 		td.appendChild(a); 
 		a.appendChild(defaultImg); 
 
-		a.onclick = function(){
-			flipCard(a, defaultImg); 
-		};
+		FlipCard(a, defaultImg); 
+				
 	} 
 
-	function flipCard(a, image){
-		
-		image.src = "pics/" + randomArray[a.getAttribute("id")] + ".png"; 
-		console.log(a); 
-	}
+	function FlipCard(a, image){
 
+		a.onclick = function(){
+			image.src = "pics/" + randomArray[a.getAttribute("id")] + ".png";
+			
+			// To seperate and be able to compare two pictures I use an array. The array will never contain more than two pictures.    
+			imagePair.push(image);
+			// aPair.push(a); 
+
+			
+			console.log(imagePair);
+
+			// Ska inte gå att klicka på dessa bilder och fylla på arrayen ännu mer. Därför kanske skicka till annan funktion. Funktion i samma funktion?
+			if(imagePair.length == 2){
+				EvaluatePictures(imagePair); 
+				imagePair = []; 
+			}	
+		}
+
+		function EvaluatePictures(images2){
+			console.log("Lalalala")
+
+			console.log(images2); 
+		}
+	}
 }; 
 
 // var rows = 3; 
@@ -73,3 +99,10 @@ window.onload = function(){
 	// pictureTable(); 
 
 };
+
+				// if(imagePair[0].src !== imagePair[1].src){
+
+				// 	setTimeout(function(){
+				// 		imagePair[0].src = "pics/0.png"; 
+				// 		imagePair[1].src = "pics/0.png"; 
+				// 	}, 1000); 
