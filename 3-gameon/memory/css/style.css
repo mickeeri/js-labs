@@ -11,6 +11,7 @@ body {
 	max-width: 760px; 
 	margin: 0 auto;
 	padding-bottom: 50px; 
+	text-align: center;
 }
 
 table{
@@ -44,8 +45,10 @@ p{
 	text-shadow: 1px 1px rgba(0, 0, 0, .9);
 }
 
-#play {
-	text-align: center; 
+#game1 {
+	border-bottom: 2px dashed #BE650E; 
+	margin: 10px;
+	padding-bottom: 20px;
 
 }
 
