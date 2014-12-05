@@ -86,9 +86,10 @@ var MemoryApp = function(rows, columns, gameId) {
 		});		
 	}
 	function EvaluatePair() {
-        // If the pictures match. 
+        // If the pictures does not match. 
 	    if (doc.pictures[0].src !== doc.pictures[1].src) {
 
+	        // Switch back to default pic and empty array. 
 	        setTimeout(function () {
 	            doc.pictures[0].src = "pics/0.png";
 	            doc.pictures[1].src = "pics/0.png";
@@ -96,8 +97,7 @@ var MemoryApp = function(rows, columns, gameId) {
 	        }, 800);
 
 	    }
-	    else{
-	        
+	    else{	        
 	        doc.numberOfPairs -= 1;
 	        doc.pictures.splice(0, 2);
 
