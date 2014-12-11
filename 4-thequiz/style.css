@@ -1,0 +1,24 @@
+#content{
+	border: 3px solid #393832; 
+	max-width: 760px; 
+	padding-bottom: 50px; 
+/*	text-align: center;*/
+	background-color: #FFF0AB;
+}
+
+p, input, h1 {
+	margin-left: 20px; 
+}
+
+h1 {
+	font-family: Helvetica; 
+}
+
+p, input {
+	font-family: Georgia; 
+	font-size: 1.3em; 
+}
+
+#send{
+	margin: 0; 
+}

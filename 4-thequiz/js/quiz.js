@@ -1,4 +1,4 @@
-// "use strict"; 
+//"use strict"; 
 
 window.onload = function(){
 	
@@ -9,10 +9,16 @@ window.onload = function(){
 	var pFeedback = document.createElement("p");
 	var inputAnswer = document.getElementById("answer"); 
 	var sendButton = document.getElementById("send"); 
+	var numberOfWrongAnswers = 0; 
+
+
+	div.appendChild(pFeedback);
 
 	getQuestion(); 
 
 	function getQuestion(){
+
+		inputAnswer.focus(); 
 
 		var xhr = new XMLHttpRequest(); 
 
@@ -30,7 +36,7 @@ window.onload = function(){
 
 		xhr.send(null); 
 
-		inputAnswer.focus(); 
+		// inputAnswer.focus(); 
 
 		sendButton.addEventListener("click", function(){
 			sendAnswer(); 
@@ -45,49 +51,67 @@ window.onload = function(){
 	}
 
 	function sendAnswer(){
-
-		var xhr = new XMLHttpRequest(); 
+		
+		var xhrAnswer = new XMLHttpRequest(); 
 			
-		var answerObject = {"answer": document.getElementById("answer").value,};
+		var answerObject = {"answer": document.getElementById("answer").value};
 
-		xhr.onreadystatechange = function(){
+		xhrAnswer.onreadystatechange = function(){
 
-			if (xhr.readyState === 4 && xhr.status === 200) {
+			if (xhrAnswer.readyState === 4) {
 
-				object = JSON.parse(xhr.responseText); 
 				
-				div.appendChild(pFeedback);
+				console.log(answerObject);  
 
-				inputAnswer.value = ""; 
 
-				pFeedback.innerHTML = "Rätt svar";
+				object = JSON.parse(xhrAnswer.responseText); 
 
-				url = object.nextURL; 
 
-				if(url !== undefined){
+				console.log(object.message); 
+
+				if(object.message === "Correct answer!" && xhrAnswer.status === 200){
+					inputAnswer.value = ""; 
+					pFeedback.setAttribute("style", "color: black;"); 
+					pFeedback.innerHTML = "Rätt svar";
+
+					url = object.nextURL; 
 					
+					if(url !== undefined){		
+						getQuestion(); 
+					}
+					else{
+
+						pFeedback.innerHTML = "Grattis! Slut på frågor.";
+						sendButton.disabled = true; 
+						inputAnswer.disabled = true; 
+					}
+
+
+				}
+				else if(object.message == "Wrong answer! :(" && xhrAnswer.status === 400 && xhrAnswer.readyState === 4){
+					numberOfWrongAnswers += 1; 
+					pFeedback.innerHTML = "Fel svar! Försök igen. Felaktiga svar: " + numberOfWrongAnswers; 
+					pFeedback.setAttribute("style", "color: red;");
+					inputAnswer.value = "";
 					getQuestion(); 
 				}
-				else{
-					pFeedback.innerHTML = "Grattis! Slut på frågor.";
-				}				
 			}
+			// // If bad request. 
+			// else if(xhr.readyState === 4 && xhr.status === 400){
+			// 	numberOfWrongAnswers += 1; 
+			// 	pFeedback.innerHTML = "Fel svar! Försök igen. Felaktiga svar: " + numberOfWrongAnswers; 
+			// 	pFeedback.setAttribute("style", "color: red;");
+			// 	inputAnswer.value = ""; 
+			// 	getQuestion();
+			// }
 		};
 
-		xhr.open("post", object.nextURL, true);
+		xhrAnswer.open("post", object.nextURL, true);
 		
-		xhr.setRequestHeader("Content-Type", "application/json"); 
+		xhrAnswer.setRequestHeader("Content-Type", "application/json"); 
 
-		xhr.send(JSON.stringify(answerObject)); 
+		xhrAnswer.send(JSON.stringify(answerObject)); 
 
 		pFeedback.innerHTML = ""; 
-		
 	}
 };
-
-/* Att göra: 
-- Lägg till focus på textrutan. 
-- Radera text i texrutan vid ny fråga. 
-
-
-*/
