@@ -7,9 +7,10 @@ window.onload = function(){
 	var url = "http://vhost3.lnu.se:20080/question/1"; 
 	var pQuestion = document.getElementById("question"); 
 	var pFeedback = document.createElement("p");
+	var inputAnswer = document.getElementById("answer"); 
+	var sendButton = document.getElementById("send"); 
 
 	getQuestion(); 
-
 
 	function getQuestion(){
 
@@ -17,11 +18,9 @@ window.onload = function(){
 
 		xhr.onreadystatechange = function(){
 		
-			if (xhr.readyState === 4 && xhr.status === 200) { // Om det är 4 är det bra. Vi har fått ett svar. 
+			if (xhr.readyState === 4 && xhr.status === 200) { 
 
 				object = JSON.parse(xhr.responseText); // Nu får jag objekt istället. 
-
-				console.log(object); 
 
 				pQuestion.innerHTML = object.question; 
 			}
@@ -31,53 +30,64 @@ window.onload = function(){
 
 		xhr.send(null); 
 
-		sendAnswer();
-	}
+		inputAnswer.focus(); 
 
+		sendButton.addEventListener("click", function(){
+			sendAnswer(); 
+		}); 
+
+		inputAnswer.addEventListener("keypress", function(e){
+			if(e.keyCode === 13){
+				sendAnswer(); 
+				e.preventDefault(); 
+			}
+		}); 
+	}
 
 	function sendAnswer(){
 
-		
-
 		var xhr = new XMLHttpRequest(); 
+			
+		var answerObject = {"answer": document.getElementById("answer").value,};
 
-		document.getElementById("send").addEventListener("click", function(){
+		xhr.onreadystatechange = function(){
 
-			// var answer = document.getElementById("answer").value; 
+			if (xhr.readyState === 4 && xhr.status === 200) {
 
-			if(object.nextURL !== undefined){
-				var answerObject = {
-					"answer": document.getElementById("answer").value,
-				};
-
-				xhr.onreadystatechange = function(){
-
-					if (xhr.readyState === 4 && xhr.status === 200) {
-
-						object = JSON.parse(xhr.responseText); 
-						
-						div.appendChild(pFeedback);
-
-						pFeedback.innerHTML = "Rätt svar";
-
-						url = object.nextURL; 
-
-						getQuestion(); 
-					}
-				};
-
-				xhr.open("post", object.nextURL, true);
+				object = JSON.parse(xhr.responseText); 
 				
-				xhr.setRequestHeader("Content-Type", "application/json"); 
+				div.appendChild(pFeedback);
 
-				xhr.send(JSON.stringify(answerObject)); 
+				inputAnswer.value = ""; 
 
-				pFeedback.innerHTML = ""; 
+				pFeedback.innerHTML = "Rätt svar";
 
-				// http://vhost3.lnu.se:20080/question/321		
+				url = object.nextURL; 
+
+				if(url !== undefined){
+					
+					getQuestion(); 
+				}
+				else{
+					pFeedback.innerHTML = "Grattis! Slut på frågor.";
+				}				
 			}
+		};
 
-			console.log("Utanför while-loopen"); 
-		});
+		xhr.open("post", object.nextURL, true);
+		
+		xhr.setRequestHeader("Content-Type", "application/json"); 
+
+		xhr.send(JSON.stringify(answerObject)); 
+
+		pFeedback.innerHTML = ""; 
+		
 	}
 };
+
+/* Att göra: 
+- Lägg till focus på textrutan. 
+- Radera text i texrutan vid ny fråga. 
+
+
+*/
