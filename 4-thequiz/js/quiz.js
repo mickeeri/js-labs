@@ -40,12 +40,14 @@ window.onload = function(){
 
 		sendButton.addEventListener("click", function(){
 			sendAnswer(); 
+			// http://www.sitepoint.com/create-one-time-events-javascript/
+			e.target.removeEventListener(e.type, arguments.callee);
 		}); 
 
 		inputAnswer.addEventListener("keypress", function(e){
 			if(e.keyCode === 13){
 				sendAnswer(); 
-				e.preventDefault(); 
+				e.target.removeEventListener(e.type, arguments.callee);
 			}
 		}); 
 	}
@@ -72,6 +74,7 @@ window.onload = function(){
 				if(object.message === "Correct answer!" && xhrAnswer.status === 200){
 					inputAnswer.value = ""; 
 					pFeedback.setAttribute("style", "color: black;"); 
+					numberOfWrongAnswers = 0; 
 					pFeedback.innerHTML = "Rätt svar";
 
 					url = object.nextURL; 
