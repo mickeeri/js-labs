@@ -2,12 +2,8 @@
 	border: 3px solid #393832; 
 	max-width: 760px; 
 	padding-bottom: 50px; 
-/*	text-align: center;*/
 	background-color: #FFF0AB;
 	border-radius: 15px; 
-/*-webkit-box-shadow: inset 0px 0px 112px 7px rgba(216,197,111,1);
--moz-box-shadow: inset 0px 0px 112px 7px rgba(216,197,111,1);
-box-shadow: inset 0px 0px 112px 7px rgba(216,197,111,1);*/
 }
 
 p, input, h1, h3, h2 {

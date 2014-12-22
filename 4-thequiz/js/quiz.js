@@ -20,6 +20,7 @@ window.onload = function(){
 
 	function getQuestion(){
 
+		// Reset counter. 
 		counter = 0; 
 		
 		inputAnswer.focus(); 
@@ -42,16 +43,12 @@ window.onload = function(){
 		inputAnswer.addEventListener("keypress", handler); 
 
 		function handler(e){			
-			if(e.button === 0 || e.keyCode === 13){
-				
+			if(e.button === 0 || e.keyCode === 13){				
+		   		// Counter prevents event from launching more than once. 
 		   		counter += 1; 
-
 		   		if (counter === 1){
 		   			sendAnswer(); 
 		   		}
-
-		   		// To prevent event from launching more than one time. http://www.sitepoint.com/create-one-time-events-javascript/
-		   		// e.target.removeEventListener(e.type, arguments.callee);
 			}
 		}
 	}
