@@ -4,8 +4,7 @@ body{
 	font: 400 16px/1.3 "Open Sans", Verdana, Helvetica, sans-serif;
 }
 
-header{
-	width: 500px; 
+header{ 
 	text-align: center;
 	margin: 0 auto;
 	color: #FE7800; 
@@ -67,3 +66,27 @@ input{
  	margin: 0 auto 1px;
 	width: 498px; 
 }
+
+.timestamp{
+	font-size: 10px; 
+	padding-left: 435px;
+	clear: both;
+}
+
+.text{
+	float: left;
+	width: 419px;
+	margin: 2px 0 0 5px; 
+	word-wrap: break-word;
+}
+
+img{
+	float: left;
+}
+
+.counter {
+	float: right;
+	margin: 10px 4px 10px;
+	font-size: 12px; 
+}
+
