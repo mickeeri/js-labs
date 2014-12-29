@@ -8,20 +8,24 @@ header{
 	width: 500px; 
 	text-align: center;
 	margin: 0 auto;
+	color: #FE7800; 
+	font: 400 40px/1.3 "Bree Serif", Georgia, serif;
 }
 
+
 form {
-	text-align: center;
+/*	text-align: center;*/
 	/*margin: 0 auto; */
 }
 
-#main{
-
-}
-
-header h1{
-	color: #FE7800; 
-	font: 400 60px/1.3 "Bree Serif", Georgia, serif;
+.formdiv{
+	border: 1px solid black;
+	float: left;
+	width: 500px; 
+	background: white; 
+	margin: 0 30px;
+	padding: 20px 10px 50px;  
+	border: 2px solid #89837A; 
 }
 
 textarea{
@@ -40,27 +44,15 @@ textarea:focus{
 }
 
 input{
-	float: right;
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .3);
 	-moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .3);
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .3);
 	font-size: 14px; 
 	margin-top: 1px; 
 	margin-right: 2px; 
+	float: right;
 }
 
-.messdiv{
-	background: white; 
-	max-width: 500px;
-	margin: 0 auto;
-	padding: 20px 10px 50px;  
-	border: 2px solid #89837A; 
-}
-
-.messagearea {
- 	margin: 0 auto 1px;
-	width: 498px; 
-}
 
 .message{
 	border: 1px solid #89837A; 
@@ -71,42 +63,7 @@ input{
 	margin: 4px 0 4px;
 }
 
-img {
-	width: 1.5em; 
-	height: 1.5em; 
-	margin-left: 3px; 
-	float: left;
+.messagearea {
+ 	margin: 0 auto 1px;
+	width: 498px; 
 }
-
-p.timestamp {
-	font-size: 10px; 
-	margin: 0 8px 2px 0;
-	padding-left: 446px; 
-	clear: both;
-
-}
-
-.text{
-	width: 434px; 
-	margin: 2px 0 0 5px; 
-	word-wrap: break-word;
-	float: left;
-
-}
-
-#counter {
-	float: right;
-	margin: 10px 4px 10px;
-	font-size: 12px; 
-}
-
-#clearfix {
-	clear: both;
-}
-
-
-
-
-
-
-

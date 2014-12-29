@@ -8,8 +8,8 @@ var MessageBoard = {
 	init: function(){
 
 		// Textarea and submit-button. 
-		var submit = document.querySelector("#send");
-		var textInput = document.querySelector("#text"); 
+		var submit = document.querySelector("#send"); // Submitbutton
+		var textInput = document.querySelector("#text"); // textArea
 		
 		// If the user presses Enter. 
 		textInput.addEventListener("keypress", function(e){
@@ -149,4 +149,7 @@ var MessageBoard = {
 	}
 }; 
 
-window.onload = MessageBoard.init; 
+window.onload = function(){
+	new MessageBoard.init;  
+
+};
