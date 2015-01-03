@@ -1,4 +1,4 @@
-//"use strict"; 
+"use strict"; 
 
 window.onload = function(){
 	new MessageBoard("board1");  
@@ -24,7 +24,7 @@ function MessageBoard(boardId){
 
 	this.mainDiv.appendChild(this.formDiv);
 
-		// Counter 
+	// Counter 
 	this.pCounter = document.createElement("p"); 
 	this.pCounter.setAttribute("class", "counter"); 
 	this.pCounter.innerHTML = "Antal meddelanden: " + this.messages.length; 
@@ -45,8 +45,7 @@ function MessageBoard(boardId){
 	var that = this;
 
 	// Event tied to the submit-button. 
-	submitButton.addEventListener("click", function(e){
-		
+	submitButton.addEventListener("click", function(e){		
 		if(that.textArea.value !== ""){
 			e.preventDefault(); // Prevent from sending. 
 			that.submitMessage(that.textArea.value); 
@@ -59,7 +58,6 @@ function MessageBoard(boardId){
 	});
 	// If the user presses Enter. 
 	this.textArea.addEventListener("keypress", function(e){
-
 		if(e.keyCode === 13 && e.shiftKey === false && that.textArea.value !== ""){
 			that.submitMessage(that.textArea.value); 
 			e.preventDefault(); 
@@ -67,8 +65,7 @@ function MessageBoard(boardId){
 		}
 		else if(e.keyCode === 13 && e.shiftKey === false && that.textArea.value === ""){
 			return false;  
-		}
-		
+		}		
 	});
 }
 
@@ -91,6 +88,7 @@ MessageBoard.prototype.renderMessages = function(){
 		// Updates counter.
 		this.pCounter.innerHTML = "Antal meddelanden: " + this.messages.length;
 
+		// Writes out messages in array. Index works as message id. 
 		this.messages.forEach(function(message, index){
 			that.renderMessage(index); 
 		}); 
