@@ -1,0 +1,63 @@
+body{
+	margin: 0;
+}
+
+#bg{
+	position: fixed;
+	top: -50%;
+	left: -50%;
+	width: 200%; 
+	height: 200%; 
+}
+
+#bg img{
+	position: absolute;
+	top: 0; 
+	left: 0; 
+	right: 0; 
+	bottom: 0; 
+	margin: auto;
+	min-width: 50%; 
+	min-height: 50%; 
+}
+
+#menu{
+	position: absolute;
+	bottom: 0px; 
+	width: 100%; 
+	background: #3C3934; 
+	opacity: 0.6; 
+	font-weight: bold; 
+	height: 62px; 
+	border-top: 3px solid black; 
+	border-bottom: 3px solid black; 
+
+}
+
+#menu ul{
+	float: left; 
+	margin: 0; padding: 0;
+	list-style-type: none; 
+
+
+}
+
+#menu li{
+	display: inline; 
+}
+
+/*#menu{
+	position: absolute;
+	bottom: 20px; 
+	left: 140px; 
+	z-index: 80; 
+	width: 100%; 
+	line-height: 12px; 
+}
+
+#menu div{
+	height: 50px; 
+	background: background:#3C3934;
+	opacity: 0.6; 
+	padding: 7px 0  0 7px; 
+}*/
