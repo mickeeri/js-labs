@@ -26,12 +26,9 @@ body{
 	bottom: 0px; 
 	width: 100%; 
 	background: #3C3934; 
-	opacity: 0.6; 
+	opacity: 0.8; 
 	font-weight: bold; 
-	height: 62px; 
 	border-top: 3px solid black; 
-	border-bottom: 3px solid black; 
-
 }
 
 #menu ul{
@@ -46,18 +43,17 @@ body{
 	display: inline; 
 }
 
-/*#menu{
-	position: absolute;
-	bottom: 20px; 
-	left: 140px; 
-	z-index: 80; 
-	width: 100%; 
-	line-height: 12px; 
+a .icon{ 
+	transition: all .2s ease-in-out; 
 }
 
-#menu div{
-	height: 50px; 
-	background: background:#3C3934;
-	opacity: 0.6; 
-	padding: 7px 0  0 7px; 
-}*/
+a:hover .icon, a:focus .icon{
+	-webkit-transform: scale(1.1) translate(5px, -10px); 
+	-moz-transform: scale(1.1) translate(5px, -10px); 
+	transform: scale(1.1) translate(5px, -10px); 
+}
+
+.icon{
+	width: 20%; 
+	padding: 4px; 
+}
