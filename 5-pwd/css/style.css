@@ -35,8 +35,6 @@ body{
 	float: left; 
 	margin: 0; padding: 0;
 	list-style-type: none; 
-
-
 }
 
 #menu li{
@@ -57,3 +55,21 @@ a:hover .icon, a:focus .icon{
 	width: 20%; 
 	padding: 4px; 
 }
+
+/*Klassnamn som gäller för alla fönster?*/
+.imgWindow{
+	background: white; 
+	margin: auto;
+	border: 2px solid black;
+	text-align: center; 
+	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+	position: relative;
+	z-index: 10;
+	padding: 10px; 
+	max-width: 500px; 
+	height: 200px; 
+	margin: 20px 20px;
+}
+

@@ -1,10 +1,9 @@
-"use strict"; 
+"use strict";
 
 window.onload = function(){
 	new MessageBoard("board1");  
 	new MessageBoard("board2"); 
 	new MessageBoard("board3");
-
 };
 
 function MessageBoard(boardId){
