@@ -6,70 +6,129 @@ body{
 	position: fixed;
 	top: -50%;
 	left: -50%;
-	width: 200%; 
-	height: 200%; 
+	width: 200%;
+	height: 200%;
 }
 
 #bg img{
 	position: absolute;
-	top: 0; 
-	left: 0; 
-	right: 0; 
-	bottom: 0; 
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	margin: auto;
-	min-width: 50%; 
-	min-height: 50%; 
+	min-width: 50%;
+	min-height: 50%;
 }
 
 #menu{
 	position: absolute;
-	bottom: 0px; 
-	width: 100%; 
-	background: #3C3934; 
-	opacity: 0.8; 
-	font-weight: bold; 
-	border-top: 3px solid black; 
+	bottom: 0px;
+	width: 100%;
+	background: #3C3934;
+	opacity: 0.8;
+	font-weight: bold;
+	border-top: 3px solid black;
 }
 
 #menu ul{
-	float: left; 
+	float: left;
 	margin: 0; padding: 0;
-	list-style-type: none; 
+	list-style-type: none;
 }
 
 #menu li{
-	display: inline; 
+	display: inline;
 }
 
-a .icon{ 
-	transition: all .2s ease-in-out; 
+a .icon{
+	transition: all .2s ease-in-out;
 }
 
 a:hover .icon, a:focus .icon{
-	-webkit-transform: scale(1.1) translate(5px, -10px); 
-	-moz-transform: scale(1.1) translate(5px, -10px); 
-	transform: scale(1.1) translate(5px, -10px); 
+	-webkit-transform: scale(1.1) translate(5px, -10px);
+	-moz-transform: scale(1.1) translate(5px, -10px);
+	transform: scale(1.1) translate(5px, -10px);
 }
 
 .icon{
-	width: 20%; 
-	padding: 4px; 
+	width: 20%;
+	padding: 4px;
 }
 
 /*Klassnamn som gäller för alla fönster?*/
 .imgWindow{
-	background: white; 
-	margin: auto;
+	background: white;
 	border: 2px solid black;
-	text-align: center; 
+	text-align: center;
 	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
 	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
 	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
-	position: relative;
+	position: fixed;
 	z-index: 10;
-	padding: 10px; 
-	max-width: 500px; 
-	height: 200px; 
-	margin: 20px 20px;
+	width: 350px;
 }
+
+.imgA{
+    padding: 7px;
+    float: left;
+    display: block;
+    background: #C8CED7;
+    margin: 9px;
+    /* -webkit-box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.4); */
+}
+
+a.imgA:hover{
+    -webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	transform: scale(1.2);
+}
+
+.windowHeader{
+    background: #3C3934;
+    height: 50px;
+}
+
+.windowFooter{
+    background: #3C3934;
+    height: 20px;
+}
+
+.imgContainer{
+    overflow: auto;
+    height: 300px;
+}
+
+.topHeader{
+    height: 20px;
+
+    /*http://www.cssmatic.com/*/
+    background: rgba(76,76,76,1);
+    background: -moz-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%,            rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(76,76,76,1)), color-stop(12%, rgba(89,89,89,1)), color-stop(25%, rgba(102,102,102,1)), color-               stop(39%, rgba(71,71,71,1)), color-stop(50%, rgba(44,44,44,1)), color-stop(51%, rgba(0,0,0,1)), color-stop(60%, rgba(17,17,17,1)), color-stop(76%, rgba(43,43,43,1)),               color-stop(91%, rgba(28,28,28,1)), color-stop(100%, rgba(19,19,19,1)));
+    background: -webkit-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%,         rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+    background: -o-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%,              rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+    background: -ms-linear-gradient(top, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%,             rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+    background: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(89,89,89,1) 12%, rgba(102,102,102,1) 25%, rgba(71,71,71,1) 39%, rgba(44,44,44,1) 50%, rgba(0,0,0,1) 51%,           rgba(17,17,17,1) 60%, rgba(43,43,43,1) 76%, rgba(28,28,28,1) 91%, rgba(19,19,19,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313', GradientType=0 );
+}
+
+.closeButton{
+    float: right;
+    width: 20px;
+    height: 20px;
+}
+
+.closeA{
+    background: #3C3934;
+}
+
+.loader{
+    margin-top: 20px;
+}
+
+
+
 
