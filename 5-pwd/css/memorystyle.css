@@ -1,55 +1,55 @@
 
-body {
+/*body {
 	background: white;
 	margin: 0;
 	font-family: 'Short Stack', cursive;
-}
+}*/
 
-#container{
+/*#container{
 	background-color: #FFB973;
 	border: 3px solid #BE650E; 
 	max-width: 400px; 
 	margin: 0 auto;
 	padding-bottom: 50px; 
 	text-align: center;
+}*/
+
+.games{
+	background-color: #FFB973;
+	font-family: 'Short Stack', cursive;
+	padding: 10px; 
+	padding-bottom: 20px;
 }
 
-table{
+.games table{
 	margin: 0 auto; 
 }
 
-td{
+.games td{
 	border: 1px solid black; 
 	padding: 5px; 
 	background-color: white; 
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .3);
 }
 
-img{
+.games img{
 	width: 1.6em; 
 	height: 1.6em;
 }
 
-h1{
+.games h1{
 	color: #BE650E;
 	text-align: center;
-	font-size: 4em;
+	font-size: 3em;
 	margin: 20px;
 	text-shadow: 1px 1px rgba(0, 0, 0, .9);
 	
 }
 
-p{
+.games p{
 	text-align: center; 
 	color: #BE650E;
 	text-shadow: 1px 1px rgba(0, 0, 0, .9);
-}
-
-.games {
-	border: 1px dashed #BE650E; 
-	margin: 10px;
-	padding-bottom: 20px;
-
 }
 
 input{
@@ -57,4 +57,12 @@ input{
 	font-size: 16px; 
 }
 
+.memWindow .windowHeader {
+	background-image: url(../pics/icons/1420585292_Game_Center.png); 
+	background-repeat: no-repeat;
+	background-position: 2px 2xp; 
+	background-size: 8%;  
+	padding: 2px; 
+	box-shadow: none; 
+}
 

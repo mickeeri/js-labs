@@ -15,9 +15,4 @@ ME222WM.util.RssReader = function(marginX, marginY){
     this.rssDiv.style.zIndex = ME222WM.util.launch.zIndex;
 
     containerDiv.appendChild(this.rssDiv);
-
-
-
-
-
 }

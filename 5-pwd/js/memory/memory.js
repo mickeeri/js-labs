@@ -1,9 +1,9 @@
 "use strict";
 
-ME222WM.util.MemoryApp = function(rows, columns, marginX, marginY) {
+ME222WM.util.MemoryApp = function(memoryDiv, rows, columns) {
 
     var doc = {
-        div: document.getElementById("memory"),
+        // div: document.getElementById("memory"),
         game: document.createElement("div"),
         randomPictureArray: new RandomGenerator.getPictureArray(rows, columns),
         idCount: 0,
@@ -14,12 +14,33 @@ ME222WM.util.MemoryApp = function(rows, columns, marginX, marginY) {
         aArray: []
     };
 
-	containerDiv.appendChild(memoryDiv); 
+	// var containerDiv = document.getElementById("container"); 
 
-	doc.div.appendChild(doc.game);
+	// var memoryDiv = document.createElement("div"); 
+	// memoryDiv.className = "imgWindow"; 
+	// memoryDiv.style.margin = marginX + "px " + marginY + "px";
+	// memory.style.height = "300px"; 
+	// memoryDiv.style.zIndex = ME222WM.util.launch.zIndex; 
+
+	// containerDiv.appendChild(memoryDiv); 
+
+	// Inserts the div containing the actual memory in between header and footer. 
+	memoryDiv.className = "memWindow"; 
+	memoryDiv.insertBefore(doc.game, memoryDiv.firstChild.nextSibling);
+
 	doc.game.setAttribute("class", "games");
 	doc.counter.innerHTML = "Antal försök: " + doc.numberOfTries;
 	doc.game.appendChild(doc.counter);
+
+	var gameOn = document.createElement("h1"); 
+	gameOn.innerHTML = "Game On";  
+	doc.game.insertBefore(gameOn, doc.game.firstChild); 
+
+	var header = memoryDiv.firstChild; 
+	header.firstChild.innerHTML = "Memory";  
+
+
+
 
 	createTable();
 
@@ -47,7 +68,7 @@ ME222WM.util.MemoryApp = function(rows, columns, marginX, marginY) {
 		// Adds a-tag to array. Later used for assigning pic src to memory card. 
 		doc.aArray.push(a); 
 		var defaultPic = document.createElement("img");
-		defaultPic.src = "pics/0.png";
+		defaultPic.src = "../3-gameon/memory/pics/0.png";
 
 		td.appendChild(a);
 		a.appendChild(defaultPic);
@@ -63,7 +84,7 @@ ME222WM.util.MemoryApp = function(rows, columns, marginX, marginY) {
 			var cardIndex = doc.aArray.indexOf(card); 
 
 			// Prevents the user from clicking already flipped card.
-			if(card.firstChild.getAttribute("src") !== "pics/0.png"){
+			if(card.firstChild.getAttribute("src") !== "../3-gameon/memory/pics/0.png"){
 				return false;
 			}
 
@@ -71,7 +92,7 @@ ME222WM.util.MemoryApp = function(rows, columns, marginX, marginY) {
 			if (doc.pictures.length <= 2) {
 
 			    // Assign picture src with cardIndex.
-				picture.src = "pics/" + doc.randomPictureArray[+cardIndex] + ".png";
+				picture.src = "../3-gameon/memory/pics/" + doc.randomPictureArray[+cardIndex] + ".png";
 
 				doc.pictures.push(picture);
 
@@ -92,8 +113,8 @@ ME222WM.util.MemoryApp = function(rows, columns, marginX, marginY) {
 
 	        // Switch back to default pic and empty array.
 	        setTimeout(function () {
-	            doc.pictures[0].src = "pics/0.png";
-	            doc.pictures[1].src = "pics/0.png";
+	            doc.pictures[0].src = "../3-gameon/memory/pics/0.png";
+	            doc.pictures[1].src = "../3-gameon/memory/pics/0.png";
 	            doc.pictures.splice(0, 2);
 	        }, 800);
 

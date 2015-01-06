@@ -30,16 +30,26 @@ ME222WM.util.ImageViewer = function(y, x, startTime){
 
     this.topHeader = document.createElement("div");
     this.topHeader.className = "topHeader";
-    var headerP = document.createElement("p");
+    var headerP = document.createElement("p"); 
+    headerP.className = "headerP"; 
     headerP.innerHTML = "Image Viewer"; 
     this.headerDiv.appendChild(this.topHeader);
+    this.topHeader.appendChild(headerP); 
 
     var closeWindowA = document.createElement("a");
     closeWindowA.href = "#";
     closeWindowA.className = "closeA";
     var closeButton = document.createElement("img");
 
-    closeButton.src = "pics/icons/1420397175_17-48.png";
+    closeButton.src = "pics/icons/ic_close_grey600_36dp.png";
+    
+    closeButton.onmouseout = function(){
+        this.src = "pics/icons/ic_close_grey600_36dp.png"; 
+    };
+
+    closeButton.onmouseover = function(){
+        this.src = "pics/icons/ic_close_white_18dp.png"; 
+    }; 
     closeButton.className = "closeButton";
     closeButton.alt = "Stäng fönster";
 
@@ -61,8 +71,8 @@ ME222WM.util.ImageViewer = function(y, x, startTime){
         that.containerDiv.removeChild(that.imgDiv);
 
         // Decreses coordinates if window closes.
-        ME222WM.util.launch.x -= 20;
-        ME222WM.util.launch.y -= 20;
+        ME222WM.util.launch.marginX -= 30;
+        ME222WM.util.launch.imgViewerStartingY -= 30;
 
         return false;
     };

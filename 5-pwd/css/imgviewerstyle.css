@@ -1,0 +1,166 @@
+/*Stylesheet for desktop, windows and Image viewer.*/
+
+body{
+	margin: 0;
+	font-family: "Oswald", sans-serif; 
+}
+
+#bg{
+	position: fixed;
+	top: -50%;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+}
+
+#bg img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	min-width: 50%;
+	min-height: 50%;
+}
+
+#menu{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	background: #3C3934;
+	opacity: 0.8;
+	font-weight: bold;
+	border-top: 3px solid black;
+}
+
+#menu ul{
+	float: left;
+	margin: 0; padding: 0;
+	list-style-type: none;
+}
+
+#menu li{
+	display: inline;
+}
+
+a .icon{
+	transition: all .2s ease-in-out;
+}
+
+a:hover .icon, a:focus .icon{
+	-webkit-transform: scale(1.1) translate(5px, -10px);
+	-moz-transform: scale(1.1) translate(5px, -10px);
+	transform: scale(1.1) translate(5px, -10px);
+}
+
+.icon{
+	width: 15%;
+	padding: 4px;
+}
+
+/*Stilegenskaper för alla fönster*/
+.imgWindow, .memWindow {
+	background: white;
+	border: 1px solid black;
+	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+	position: fixed;
+	width: 350px;
+}
+
+.imgA{
+    padding: 7px;
+    float: left;
+    display: block;
+    background: #C8CED7;
+    margin: 9px;
+    /* -webkit-box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.4); */
+}
+
+a.imgA:hover{
+    -webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	transform: scale(1.2);
+}
+
+.windowHeader{
+    background: #222222;
+    height: 50px;
+    -webkit-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+    box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+}
+
+.windowFooter{
+    background: #222222;
+    height: 26px;
+    -webkit-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+    box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+
+}
+
+.imgContainer{
+    overflow: auto;
+    height: 300px;
+    text-align: center; 
+}
+
+.topHeader{
+    height: 30px;
+    background-image: url(../pics/icons/1420313406_Toolbar_Images.png); 
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 8%;  
+    padding: 2px; 
+}
+
+.closeButton{
+	width: inherit;
+}
+
+.closeA{
+	border: 1px solid black; 
+	display: block;
+	width: 20px;
+    height: 20px; 
+    float: right;
+    margin-right: 2px;
+	border-right: 1px solid black;
+    border-left: 1px solid #737373;
+    border-bottom: 1px solid #737373;
+}
+
+.closeA:hover{
+	border-right: 1px solid #737373;
+    border-left: 1px solid black;
+    border-bottom: 1px solid #737373;
+}
+
+.loader{
+    margin-top: 20px;
+
+}
+
+.footerP{
+	color: #84B5B1; 
+	font-size: 10px; 
+	float: left; 
+	margin: 5px 0 0 4px; 
+}
+
+.headerP{
+	color: white; 
+	margin: 4px 0 0 30px; 
+	font-size: 16px; 
+	float: left;
+	font-weight: bold; 
+}
+
+
+
+
