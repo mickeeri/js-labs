@@ -1,10 +1,11 @@
-"use strict";
+//"use strict";
 
-ME222WM.util.ImageViewer = function(y, x){
+ME222WM.util.ImageViewer = function(y, x, startTime){
 	this.counter = 0;
 
     this.y = y;
     this.x = x;
+    this.startTime = startTime; 
 
     this.containerDiv = document.getElementById("container");
 
@@ -29,6 +30,8 @@ ME222WM.util.ImageViewer = function(y, x){
 
     this.topHeader = document.createElement("div");
     this.topHeader.className = "topHeader";
+    var headerP = document.createElement("p");
+    headerP.innerHTML = "Image Viewer"; 
     this.headerDiv.appendChild(this.topHeader);
 
     var closeWindowA = document.createElement("a");
@@ -64,14 +67,15 @@ ME222WM.util.ImageViewer = function(y, x){
         return false;
     };
 
+    // If user clicks on image window z-index changes. 
     this.imgDiv.onclick = function(){
 
         // Increses z-index so that div lands on top of the other divs.
         ME222WM.util.launch.zIndex += 1;
 
         that.imgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + "; margin: " + that.y + "px " + that.x + "px;");
-    }
-}
+    };
+};
 
 ME222WM.util.ImageViewer.prototype.getImages = function(){
 
@@ -94,7 +98,12 @@ ME222WM.util.ImageViewer.prototype.getImages = function(){
             that.imgContainer.removeChild(that.ajaxLoader);
 
             var imageArray = JSON.parse(xhr.responseText);
+
             that.renderImages(imageArray);
+
+            var endTime = new Date();
+
+            that.timeAjaxLoad(imageArray, endTime);
         }
     };
 
@@ -159,7 +168,18 @@ ME222WM.util.ImageViewer.prototype.calculateSize = function(images){
         // a is equal to b
         return 0;
     });
-
     this.maxWidth = sortedArray[sortedArray.length - 1].thumbWidth;
-
 };
+
+ME222WM.util.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
+    var statusP = document.createElement("p"); 
+    statusP.className = "footerP"; 
+
+    var loadTime = endTime.getTime() - this.startTime.getTime() + " ms";
+
+    console.log(loadTime); 
+    statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
+    this.footerDiv.appendChild(statusP); 
+}; 
+
+

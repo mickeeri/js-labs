@@ -93,7 +93,8 @@ a.imgA:hover{
 
 .windowFooter{
     background: #3C3934;
-    height: 20px;
+    height: 26px;
+
 }
 
 .imgContainer{
@@ -102,7 +103,8 @@ a.imgA:hover{
 }
 
 .topHeader{
-    height: 20px;
+    height: 30px;
+    background-image: src(pics/)
 
     /*http://www.cssmatic.com/*/
     background: rgba(76,76,76,1);
@@ -127,6 +129,13 @@ a.imgA:hover{
 
 .loader{
     margin-top: 20px;
+}
+
+.footerP{
+	color: white; 
+	font-size: 12px; 
+	float: left; 
+	margin: 3px 0 0 2px; 
 }
 
 
