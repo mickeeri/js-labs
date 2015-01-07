@@ -2,9 +2,58 @@
 
 var ME222WM = ME222WM || {};
 ME222WM.util = ME222WM.util || {};
+ME222WM.util.apps = ME222WM.util.apps || {}; 
+
+ME222WM.util.positions = {
+    topPosition: 10,
+    leftPosition: 1000,
+    z_index: 1
+}
+
+
+ME222WM.util.init = function(){
+    
+    var that = this; 
+
+    // this.marginX; 
+    // this.marginY; 
+    // this.z_index; 
+    
+    //  var positions = {
+    //     leftPosition: 0, 
+    //     topPosition: 10,
+    //     z_index: 1
+    // }
+
+    // this.variable = 1; 
+
+    // this.leftPosition = 0; 
+    // this.topPosition = 10; 
+
+    this.icons = {
+        memoryIcon: document.getElementById("memory"),
+    }
+
+    this.icons.memoryIcon.addEventListener("click", function(e){
+
+        // Starting positions.
+        var topPosition = 10; 
+        var leftPosition = 1000; 
+
+        var memApp =  new ME222WM.util.Window("memory", topPosition, leftPosition);
+
+        e.preventDefault(); 
+    }); 
+}
+
+// ME222WM.util.prototype.changePositions = function(){
+
+// }; 
+
+
 
 ME222WM.util.launch = {
-    marginX: 15, // Check if x and y is the right names.
+    marginX: 15,
     imgViewerStartingY: 15,
     zIndex: 1,
     rssMarginY: 600,
@@ -49,28 +98,33 @@ ME222WM.util.launch = {
 
 //WINDOW.ONLOAD------------------------------------------------------------ Lägga denna i annat dokument?
 window.onload = function(){
-    var imgViewerIcon = document.getElementById("imageviewer");
-    var rssIcon = document.getElementById("rssfeed");
-    var memoryIcon = document.getElementById("memory");
+    
+    ME222WM.util.init();  
 
-    imgViewerIcon.addEventListener("click", function(e){
-    	ME222WM.util.launch.createImageViewer();
-    	e.preventDefault();
-    });
 
-    rssIcon.addEventListener("click", function(e){
+    // var imgViewerIcon = document.getElementById("imageviewer");
+    // var rssIcon = document.getElementById("rssfeed");
+    // var memoryIcon = document.getElementById("memory");
 
-        ME222WM.util.launch.createRssReader();
-    	e.preventDefault();
-    });
+    // imgViewerIcon.addEventListener("click", function(e){
+    // 	ME222WM.util.launch.createImageViewer();
+    // 	e.preventDefault();
+    // });
 
-    memoryIcon.addEventListener("click", function(e){
+    // rssIcon.addEventListener("click", function(e){
 
-        var memoryMarginX = ME222WM.util.launch.memoryMarginX +=30; 
-        var memoryMarginY = ME222WM.util.launch.memoryMarginY +=30;
+    //     ME222WM.util.launch.createRssReader();
+    // 	e.preventDefault();
+    // });
 
-        // Behöver egentligen inte marginx och y som parametrar? 
-        ME222WM.util.createWindow("memory", memoryMarginX, memoryMarginY); 
-        e.preventDefault(); 
-    });
+    // memoryIcon.addEventListener("click", function(e){
+
+    //     var memoryMarginX = ME222WM.util.launch.memoryMarginX +=30; 
+    //     var memoryMarginY = ME222WM.util.launch.memoryMarginY +=30;
+    //     ME222WM.util.launch.zIndex += 1; 
+
+    //     // Behöver egentligen inte marginx och y som parametrar? 
+    //     ME222WM.util.createWindow("memory", memoryMarginX, memoryMarginY); 
+    //     e.preventDefault(); 
+    // });
 };

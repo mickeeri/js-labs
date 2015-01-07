@@ -100,8 +100,6 @@ ME222WM.util.ImageViewer.prototype.getImages = function(){
     xhr.open("get", url, true);
     xhr.onreadystatechange = function(){
 
-        console.log(xhr.readyState);
-
         if(xhr.readyState === 4 && xhr.status === 200){
 
             // Remove loader when pictures are loaded.
@@ -125,6 +123,7 @@ ME222WM.util.ImageViewer.prototype.renderImages = function(images){
     this.calculateSize(images);
 
     var that = this;
+
     images.forEach(function(image, index){
        that.renderImage(image, index);
     });
@@ -146,6 +145,17 @@ ME222WM.util.ImageViewer.prototype.renderImage = function(image, index){
     this.imgAtag.appendChild(thumbnail);
 
     this.imgAtag.setAttribute("style", "width: " + this.maxWidth + "px;" + " height: " + this.maxHeight + "px;");
+
+    var that = this; 
+
+    this.imgAtag.addEventListener("click", function(e){
+        // Clicking thumbnail opens method openImage that takes img object as parameter. 
+        // that.openImage(image); 
+
+        that.openLargeImage(image); 
+
+        console.log(that)
+    }); 
 };
 
 ME222WM.util.ImageViewer.prototype.calculateSize = function(images){
@@ -187,9 +197,30 @@ ME222WM.util.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
 
     var loadTime = endTime.getTime() - this.startTime.getTime() + " ms";
 
-    console.log(loadTime); 
     statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
     this.footerDiv.appendChild(statusP); 
 }; 
+
+ME222WM.util.ImageViewer.prototype.openLargeImage = function(imgObject){
+    
+    var largeImgDiv = document.createElement("div"); 
+    largeImgDiv.className = "largeImgDiv"; 
+    this.containerDiv.appendChild(largeImgDiv); 
+    ME222WM.util.launch.zIndex += 1; 
+
+    // largeImgDiv.style.zIndex = ME222WM.util.launch.zIndex;
+    largeImgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + ";" + "margin: " + this.y + "px " + this.x + "px;");
+
+    console.log(imgObject); 
+
+    var largeImg = document.createElement("img"); 
+    largeImg.src = imgObject.URL; 
+    largeImg.width = imgObject.width; 
+    largeImg.height = imgObject.height; 
+
+    largeImgDiv.appendChild(largeImg); 
+
+
+};
 
 

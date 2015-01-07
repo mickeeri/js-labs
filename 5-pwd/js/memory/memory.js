@@ -1,6 +1,6 @@
 "use strict";
 
-ME222WM.util.MemoryApp = function(memoryDiv, rows, columns) {
+ME222WM.util.apps.MemoryApp = function(memoryDiv, rows, columns) {
 
     var doc = {
         // div: document.getElementById("memory"),
