@@ -1,9 +1,8 @@
 "use strict";
 
-ME222WM.util.apps.MemoryApp = function(memoryDiv, rows, columns) {
+ME222WM.apps.MemoryApp = function(memoryDiv, rows, columns) {
 
     var doc = {
-        // div: document.getElementById("memory"),
         game: document.createElement("div"),
         randomPictureArray: new RandomGenerator.getPictureArray(rows, columns),
         idCount: 0,
@@ -14,18 +13,9 @@ ME222WM.util.apps.MemoryApp = function(memoryDiv, rows, columns) {
         aArray: []
     };
 
-	// var containerDiv = document.getElementById("container"); 
-
-	// var memoryDiv = document.createElement("div"); 
-	// memoryDiv.className = "imgWindow"; 
-	// memoryDiv.style.margin = marginX + "px " + marginY + "px";
-	// memory.style.height = "300px"; 
-	// memoryDiv.style.zIndex = ME222WM.util.launch.zIndex; 
-
-	// containerDiv.appendChild(memoryDiv); 
-
-	// Inserts the div containing the actual memory in between header and footer. 
 	memoryDiv.className = "memWindow"; 
+	
+	// Insert the div containing actual memory in between header and footer. 
 	memoryDiv.insertBefore(doc.game, memoryDiv.firstChild.nextSibling);
 
 	doc.game.setAttribute("class", "games");
@@ -38,9 +28,6 @@ ME222WM.util.apps.MemoryApp = function(memoryDiv, rows, columns) {
 
 	var header = memoryDiv.firstChild; 
 	header.firstChild.innerHTML = "Memory";  
-
-
-
 
 	createTable();
 

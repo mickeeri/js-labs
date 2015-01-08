@@ -1,60 +1,15 @@
-//"use strict";
+"use strict";
 
-ME222WM.util.ImageViewer = function(y, x, startTime){
-	this.counter = 0;
+ME222WM.apps.ImageViewer = function(imgViewerDiv, startTime){
 
-    this.y = y;
-    this.x = x;
-    this.startTime = startTime; 
-
-    this.containerDiv = document.getElementById("container");
-
-    // Div for imageViewer window.
-    this.imgDiv = document.createElement("div");
-	this.imgDiv.className = "imgWindow";
-    this.imgDiv.setAttribute("style", "margin: " + this.y + "px " + this.x + "px;");
-    this.imgDiv.style.zIndex = ME222WM.util.launch.zIndex;
-	this.containerDiv.appendChild(this.imgDiv);
-
-    this.headerDiv = document.createElement("div");
-    this.headerDiv.className = "windowHeader";
-    this.imgDiv.appendChild(this.headerDiv);
+    this.getStartTime = function(){
+        console.log(startTime); 
+        return startTime; 
+    };
 
     this.imgContainer = document.createElement("div");
     this.imgContainer.className = "imgContainer";
-    this.imgDiv.appendChild(this.imgContainer);
-
-    this.footerDiv = document.createElement("div");
-    this.footerDiv.className = "windowFooter";
-    this.imgDiv.appendChild(this.footerDiv);
-
-    this.topHeader = document.createElement("div");
-    this.topHeader.className = "topHeader";
-    var headerP = document.createElement("p"); 
-    headerP.className = "headerP"; 
-    headerP.innerHTML = "Image Viewer"; 
-    this.headerDiv.appendChild(this.topHeader);
-    this.topHeader.appendChild(headerP); 
-
-    var closeWindowA = document.createElement("a");
-    closeWindowA.href = "#";
-    closeWindowA.className = "closeA";
-    var closeButton = document.createElement("img");
-
-    closeButton.src = "pics/icons/ic_close_grey600_36dp.png";
-    
-    closeButton.onmouseout = function(){
-        this.src = "pics/icons/ic_close_grey600_36dp.png"; 
-    };
-
-    closeButton.onmouseover = function(){
-        this.src = "pics/icons/ic_close_white_18dp.png"; 
-    }; 
-    closeButton.className = "closeButton";
-    closeButton.alt = "Stäng fönster";
-
-    this.topHeader.appendChild(closeWindowA);
-    closeWindowA.appendChild(closeButton);
+    imgViewerDiv.insertBefore(this.imgContainer, imgViewerDiv.firstChild.nextSibling); 
 
     this.ajaxLoader = document.createElement("img");
     this.ajaxLoader.src = "pics/icons/ajax-loader.gif";
@@ -62,32 +17,14 @@ ME222WM.util.ImageViewer = function(y, x, startTime){
     this.ajaxLoader.className = "loader";
     this.imgContainer.appendChild(this.ajaxLoader);
 
+    var header = imgViewerDiv.firstChild; 
+    this.footer = imgViewerDiv.lastChild; 
+    header.firstChild.innerHTML = "Image Viewer"; 
+
     this.getImages();
-
-    var that = this;
-
-    closeWindowA.onclick = function(){
-
-        that.containerDiv.removeChild(that.imgDiv);
-
-        // Decreses coordinates if window closes.
-        ME222WM.util.launch.marginX -= 30;
-        ME222WM.util.launch.imgViewerStartingY -= 30;
-
-        return false;
-    };
-
-    // If user clicks on image window z-index changes. 
-    this.imgDiv.onclick = function(){
-
-        // Increses z-index so that div lands on top of the other divs.
-        ME222WM.util.launch.zIndex += 1;
-
-        that.imgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + "; margin: " + that.y + "px " + that.x + "px;");
-    };
 };
 
-ME222WM.util.ImageViewer.prototype.getImages = function(){
+ME222WM.apps.ImageViewer.prototype.getImages = function(){
 
     this.counter = 0;
 
@@ -118,7 +55,7 @@ ME222WM.util.ImageViewer.prototype.getImages = function(){
     xhr.send(null);
 };
 
-ME222WM.util.ImageViewer.prototype.renderImages = function(images){
+ME222WM.apps.ImageViewer.prototype.renderImages = function(images){
 
     this.calculateSize(images);
 
@@ -129,7 +66,7 @@ ME222WM.util.ImageViewer.prototype.renderImages = function(images){
     });
 };
 
-ME222WM.util.ImageViewer.prototype.renderImage = function(image, index){
+ME222WM.apps.ImageViewer.prototype.renderImage = function(image, index){
 
     this.imgAtag = document.createElement("a");
     this.imgAtag.className = "imgA";
@@ -150,15 +87,11 @@ ME222WM.util.ImageViewer.prototype.renderImage = function(image, index){
 
     this.imgAtag.addEventListener("click", function(e){
         // Clicking thumbnail opens method openImage that takes img object as parameter. 
-        // that.openImage(image); 
-
         that.openLargeImage(image); 
-
-        console.log(that)
     }); 
 };
 
-ME222WM.util.ImageViewer.prototype.calculateSize = function(images){
+ME222WM.apps.ImageViewer.prototype.calculateSize = function(images){
 
     // Making copy of array.
     var sortedArray = images.slice();
@@ -191,17 +124,19 @@ ME222WM.util.ImageViewer.prototype.calculateSize = function(images){
     this.maxWidth = sortedArray[sortedArray.length - 1].thumbWidth;
 };
 
-ME222WM.util.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
+ME222WM.apps.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
     var statusP = document.createElement("p"); 
     statusP.className = "footerP"; 
 
-    var loadTime = endTime.getTime() - this.startTime.getTime() + " ms";
+    console.log(this.getStartTime()); 
+
+    var loadTime = endTime.getTime() - this.getStartTime().getTime() + " ms";
 
     statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
-    this.footerDiv.appendChild(statusP); 
+    this.footer.appendChild(statusP); 
 }; 
 
-ME222WM.util.ImageViewer.prototype.openLargeImage = function(imgObject){
+ME222WM.apps.ImageViewer.prototype.openLargeImage = function(imgObject){
     
     var largeImgDiv = document.createElement("div"); 
     largeImgDiv.className = "largeImgDiv"; 
