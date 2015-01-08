@@ -3,7 +3,6 @@
 ME222WM.apps.ImageViewer = function(imgViewerDiv, startTime){
 
     this.getStartTime = function(){
-        console.log(startTime); 
         return startTime; 
     };
 
@@ -128,8 +127,6 @@ ME222WM.apps.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
     var statusP = document.createElement("p"); 
     statusP.className = "footerP"; 
 
-    console.log(this.getStartTime()); 
-
     var loadTime = endTime.getTime() - this.getStartTime().getTime() + " ms";
 
     statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
@@ -145,8 +142,6 @@ ME222WM.apps.ImageViewer.prototype.openLargeImage = function(imgObject){
 
     // largeImgDiv.style.zIndex = ME222WM.util.launch.zIndex;
     largeImgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + ";" + "margin: " + this.y + "px " + this.x + "px;");
-
-    console.log(imgObject); 
 
     var largeImg = document.createElement("img"); 
     largeImg.src = imgObject.URL; 

@@ -13,7 +13,7 @@ ME222WM.apps.MemoryApp = function(memoryDiv, rows, columns) {
         aArray: []
     };
 
-	memoryDiv.className = "memWindow"; 
+	// memoryDiv.className = "memWindow"; 
 	
 	// Insert the div containing actual memory in between header and footer. 
 	memoryDiv.insertBefore(doc.game, memoryDiv.firstChild.nextSibling);
@@ -121,18 +121,13 @@ ME222WM.apps.MemoryApp = function(memoryDiv, rows, columns) {
 		result.innerHTML = "Grattis! Spelet är slut. Du behövde " + doc.numberOfTries + " försök för att lyckas.";
 
 		doc.game.appendChild(result);
-
-
+		
 		// var playAgain = document.createElement("input");
 		// playAgain.type = "button";
 		// playAgain.value = "Spela igen";
 		// doc.game.appendChild(playAgain);
 
 		// playAgain.onclick = function(){
-
-		//    doc.div.removeChild(doc.game);
-		//    // doc.game.innerHTML = "";
-		// 	new MemoryApp(rows, columns);
 		// };
 	}
 };

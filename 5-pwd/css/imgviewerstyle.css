@@ -1,8 +1,14 @@
 /*Stylesheet for desktop, windows and Image viewer.*/
 
+html{
+	height: 100%; 
+}
+
+
 body{
 	margin: 0;
 	font-family: "Oswald", sans-serif; 
+	min-height: 100%; 
 }
 
 #bg{
@@ -48,7 +54,7 @@ a .icon{
 	transition: all .2s ease-in-out;
 }
 
-a:hover .icon, a:focus .icon{
+a:hover .icon {
 	-webkit-transform: scale(1.1) translate(5px, -10px);
 	-moz-transform: scale(1.1) translate(5px, -10px);
 	transform: scale(1.1) translate(5px, -10px);
@@ -61,13 +67,19 @@ a:hover .icon, a:focus .icon{
 
 /*Stilegenskaper för alla fönster*/
 .imgWindow, .memWindow, .newWindow {
-	background: white;
-	border: 1px solid black;
+	position: absolute;
 	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
 	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
 	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
-	position: fixed;
-	width: 400px;
+	width: 380px;
+	height: 390px;
+}
+
+.newWindow div:focus{
+	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
+	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
+	box-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
+	border: 5px solid white;
 }
 
 .imgA{
@@ -82,7 +94,7 @@ a:hover .icon, a:focus .icon{
     border: 1px solid #6F809A;
 }
 
-a.imgA:hover{
+a.imgA:hover, a.imgA:focus{
     -webkit-transform: scale(1.2);
 	-moz-transform: scale(1.2);
 	transform: scale(1.2);
@@ -92,20 +104,28 @@ a.imgA:hover{
 }
 
 .windowHeader{
-    background: #222222;
-    height: 50px;
-    -webkit-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
-    box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+    /*background-image: linear-gradient(#000D0B, #20263A);*/
+
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#282828),to(#191919));
+    background-image: -webkit-linear-gradient(top,#282828,#191919);
+    background-image: linear-gradient(top,#282828,#191919);
+    height: 56px;
+    border: 1px solid black; 
+    border-bottom: none; 
+    background-repeat: no-repeat;
+    padding: 2px;
 }
 
 .windowFooter{
-    background: #222222;
     height: 26px;
-    -webkit-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
-    box-shadow: inset 3px 12px 45px 5px rgba(0,0,0,0.75);
+    /*background-image: linear-gradient(#20263A, #000D0B);*/
+    border: 1px solid black; 
+    border-top: none;
     color: white;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#282828),to(#191919));
+    background-image: -webkit-linear-gradient(top,#282828,#191919);
+    background-image: linear-gradient(top,#282828,#191919);
+    background-repeat: no-repeat;
 
 }
 
@@ -113,17 +133,9 @@ a.imgA:hover{
     overflow: auto;
     height: 400px;
     text-align: center; 
-    padding: 20px;
+    padding: 15px;
     background: #FFF6D3;
-}
-
-.topHeader{
-    height: 30px;
-    background-image: url(../pics/icons/1420313406_Toolbar_Images.png); 
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: 8%;  
-    padding: 2px; 
+    border: 1px solid black;
 }
 
 .closeButton{
@@ -168,6 +180,10 @@ a.imgA:hover{
 
 .largeImgDiv{
 	border 1px solid black; 
+}
+
+.windowA:focus{
+	border: 5px solid white;
 }
 
 
