@@ -10,7 +10,7 @@ window.onload = function(){
 	var inputAnswer = document.getElementById("answer");
 	var sendButton = document.getElementById("send");
 	var H3questionNumber = document.getElementById("questionnumber");
-	var numberOfWrongAnswers = 0;
+	var numberOfWrongAnswers2 = 0;
 	var guessArray = [];
 	var questionNumber = 1;
 	var resultObject;
@@ -31,7 +31,7 @@ window.onload = function(){
 
 			if (xhr.readyState === 4 && xhr.status === 200) {
 
-				object = JSON.parse(xhr.responseText); // Nu får jag objekt istället.
+				object = JSON.parse(xhr.responseText); 
 				pQuestion.innerHTML = object.question;
 			}
 		};
@@ -48,7 +48,7 @@ window.onload = function(){
 		   		counter += 1;
 		   		if (counter === 1){
 		   			sendAnswer();
-		   		}
+		   		} 
 			}
 		}
 	}
@@ -70,10 +70,10 @@ window.onload = function(){
 
 					inputAnswer.value = "";
 					pFeedback.setAttribute("style", "color: black;");
-					resultObject = {"questionnr": questionNumber, "numberofwronganswers": numberOfWrongAnswers};
+					resultObject = {"questionnr": questionNumber, "numberofwronganswers": numberOfWrongAnswers2};
 					questionNumber += 1;
 					guessArray.push(resultObject);
-					numberOfWrongAnswers = 0;
+					numberOfWrongAnswers2 = 0;
 					pFeedback.innerHTML = "Rätt svar";
 
 					url = object.nextURL;
@@ -111,8 +111,9 @@ window.onload = function(){
 					}
 				}
 				else if(object.message == "Wrong answer! :(" && xhrAnswer.status === 400){
-					numberOfWrongAnswers += 1;
-					pFeedback.innerHTML = "Fel svar! Försök igen. Felaktiga svar på frågan: " + numberOfWrongAnswers;
+					
+					numberOfWrongAnswers2 += 1; 
+					pFeedback.innerHTML = "Fel svar! Försök igen. Felaktiga svar på frågan: " + numberOfWrongAnswers2;
 					pFeedback.setAttribute("style", "color: red;");
 					// Clears input-field.
 					inputAnswer.value = "";

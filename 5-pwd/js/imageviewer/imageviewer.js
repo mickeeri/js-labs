@@ -85,8 +85,18 @@ ME222WM.apps.ImageViewer.prototype.renderImage = function(image, index){
     var that = this; 
 
     this.imgAtag.addEventListener("click", function(e){
+        
+        var imgType; 
+
+        if(image.height > 400){
+            imgType = "veryLargeImg"; 
+        }
+        else{
+            imgType = "largeImg"; 
+        }
+
         // Clicking thumbnail opens method openImage that takes img object as parameter. 
-        that.openLargeImage(image); 
+        new ME222WM.util.Window(imgType, image);  
     }); 
 };
 
@@ -133,24 +143,66 @@ ME222WM.apps.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
     this.footer.appendChild(statusP); 
 }; 
 
-ME222WM.apps.ImageViewer.prototype.openLargeImage = function(imgObject){
-    
-    var largeImgDiv = document.createElement("div"); 
-    largeImgDiv.className = "largeImgDiv"; 
-    this.containerDiv.appendChild(largeImgDiv); 
-    ME222WM.util.launch.zIndex += 1; 
 
-    // largeImgDiv.style.zIndex = ME222WM.util.launch.zIndex;
-    largeImgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + ";" + "margin: " + this.y + "px " + this.x + "px;");
+ME222WM.apps.ImageViewer.prototype.openLargeImage = function(largeImgDiv, imgObject){
 
+
+    var largeImgA = document.createElement("a"); 
+    largeImgA.href = "#";
+    largeImgA.className = "largeImgA"; 
+
+    largeImgA.style.height = imgObject.height + "px"; 
+    largeImgA.style.width = imgObject.width + "px"; 
+     
     var largeImg = document.createElement("img"); 
     largeImg.src = imgObject.URL; 
-    largeImg.width = imgObject.width; 
-    largeImg.height = imgObject.height; 
+    // largeImg.width = imgObject.width; 
+    // largeImg.height = imgObject.height;
+    largeImg.className = "largeImg"; 
 
-    largeImgDiv.appendChild(largeImg); 
+    // ME222WM.positions.z_index += 1; 
+
+    largeImgA.appendChild(largeImg); 
 
 
-};
+    // largeImgDiv.style.zIndex = 10; 
+    largeImgDiv.insertBefore(largeImgA, largeImgDiv.firstChild.nextSibling); 
+
+    console.log(imgObject); 
+
+    var infoP = document.createElement("p"); 
+    infoP.innerHTML = "Klicka på bilden för att göra den till bakgrundsbild. För original ";
+    infoP.className = "footerP";  
+    var defaultBackgroundA = document.createElement("a");
+    defaultBackgroundA.innerHTML = "klicka här"; 
+    defaultBackgroundA.href = "#"; 
+
+
+    infoP.appendChild(defaultBackgroundA);
+    largeImgDiv.lastChild.appendChild(infoP); 
+
+    console.log(largeImgDiv.lastChild); 
+
+
+    largeImgA.addEventListener("click", function(){
+        document.body.style.backgroundImage = "url('" + imgObject.URL + "')"; 
+        // document.body.style.backgroundRepeat = "no-repeat"; 
+        if(imgObject.height > 400){
+            document.body.style.backgroundRepeat = "repeat"; 
+            document.body.style.backgroundSize = "contain";   
+        }
+        else {
+            document.body.style.backgroundRepeat = "no-repeat"; 
+            document.body.style.backgroundSize = "100%"; 
+        }
+    }); 
+
+    defaultBackgroundA.addEventListener("click", function(e){
+        document.body.style.backgroundImage = "url('pics/bg-3-full.jpg')"; 
+        document.body.style.backgroundRepeat = "no-repeat"; 
+    }); 
+}; 
+
+
 
 

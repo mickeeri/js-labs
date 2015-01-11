@@ -1,10 +1,12 @@
 "use strict"; 
 
-ME222WM.util.Window = function(wndType){
+ME222WM.util.Window = function(wndType, imgObject){
 
 	this.getWndType = function(){
 		return wndType; 
 	};
+
+	this.imgObject = imgObject; 
 
 	this.renderWindow(); 
 }
@@ -14,7 +16,7 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 	var containerDiv = document.getElementById("container"); 
 	
 	// Göra om denna till en a-tagg istället? 
-	this.appContainer = document.createElement("div"); 
+	this.newWindow = document.createElement("div"); 
 
 	var windowA = document.createElement("a"); 
 	var headerDiv = document.createElement("div"); 
@@ -23,12 +25,9 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 	var closeButton = document.createElement("img"); 
 	var footerDiv = document.createElement("div");
 
-	// // Sets style properties for window. 
-	this.appContainer.style.zIndex = ME222WM.positions.z_index; 
-	// this.appContainer.style.top = this.getTopPosition() + "px"; 
-	// this.appContainer.style.left = this.getLeftPosition() + "px"; 
+	this.newWindow.style.zIndex = ME222WM.positions.z_index; 
 
-	this.appContainer.className = "newWindow"; 
+	this.newWindow.className = "newWindow"; 
 	headerDiv.className = "windowHeader"; 
 	footerDiv.className = "windowFooter"; 
 	headerP.className = "headerP";
@@ -49,13 +48,13 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 	windowA.className = "windowA"; 
 
 	containerDiv.appendChild(windowA); 
-	windowA.appendChild(this.appContainer); 
+	windowA.appendChild(this.newWindow); 
 
-	this.appContainer.appendChild(headerDiv); 
+	this.newWindow.appendChild(headerDiv); 
 	headerDiv.appendChild(headerP);
 	headerDiv.appendChild(closeWindowA); 
 	closeWindowA.appendChild(closeButton);
-	this.appContainer.appendChild(footerDiv); 
+	this.newWindow.appendChild(footerDiv); 
 
 	var that = this;
 
@@ -63,30 +62,43 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 
 	function setPosition(){
 		
-		// Node-list with new windows/appContainers. 
+		// Node-list with new windows/newWindows. 
 		var newWindows = document.getElementsByClassName("newWindow");
 
 		// If there is only one window set default position.  
 		if(newWindows.length === 1){
-			that.appContainer.style.top = "20px"; 
-			that.appContainer.style.left = "20px"; 
+			that.newWindow.style.top = "20px"; 
+			that.newWindow.style.left = "20px"; 
 		}
 		else{
 			
 			// Sets new windows top and left positon previous windows value plus 60 and 40 px. 
 			// This way the new window always is ontop. 
 			var previousTopPosition = parseInt(newWindows[newWindows.length - 2].style.top); 
-			var previousLeftPosition = parseInt(newWindows[newWindows.length - 2].style.top); 
+			var previousLeftPosition = parseInt(newWindows[newWindows.length - 2].style.left); 
 
-			var newTopPosition = previousTopPosition + 70 + "px"; 
-			var newLeftPosition = previousLeftPosition + 30 + "px"; 
+			var newTopPosition; 
+			var newLeftPosition; 
+	
+			newTopPosition = previousTopPosition + 70 + "px"; 
+			newLeftPosition = previousLeftPosition + 30 + "px";
+			
+			that.newWindow.style.top = newTopPosition; 
+			that.newWindow.style.left = newLeftPosition; 
 
-			if(newTopPosition > containerDiv.offsetHeight){
-				console.log("Stoppit"); 
+			var contentHeight = newWindows[newWindows.length - 2].firstChild.nextSibling.offsetHeight; 
+			var headerHeight = newWindows[newWindows.length - 2].firstChild.offsetHeight; 
+			var footerHeight = newWindows[newWindows.length - 2].lastChild.offsetHeight;
+
+			if(that.getWndType() === "veryLargeImg"){
+				contentHeight = 750; 
 			}
 
-			that.appContainer.style.top = newTopPosition; 
-			that.appContainer.style.left = newLeftPosition; 
+			var prevDivHeight = contentHeight + headerHeight + footerHeight + previousTopPosition; 
+
+			if(prevDivHeight > document.body.offsetHeight - 100){
+				that.newWindow.style.top = "30px"; 
+			}
 		}
 	}
 
@@ -96,33 +108,72 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 		ME222WM.positions.z_index -= 1; 
 	}); 
 
-	windowA.addEventListener("click", function(){
+	windowA.addEventListener("mousedown", function(e){
+		
 		ME222WM.positions.z_index += 1; 
 
 		this.focus(); 
 		
-		that.appContainer.style.zIndex = ME222WM.positions.z_index; 
+		that.newWindow.style.zIndex = ME222WM.positions.z_index; 
 	});  	
 
-	var height = this.appContainer.offsetHeight + headerDiv.offsetHeight + footerDiv.offsetHeight; 
-
-	console.log(height); 
-
-
-
+	var height = this.newWindow.offsetHeight + headerDiv.offsetHeight + footerDiv.offsetHeight; 
 	this.startApp(); 
 };
 
 ME222WM.util.Window.prototype.startApp = function(){
 
 	if(this.getWndType() === "imgViewer") {
-		new ME222WM.apps.ImageViewer(this.appContainer, new Date()); 
+		new ME222WM.apps.ImageViewer(this.newWindow, new Date()); 
 	};
 
 	if(this.getWndType() === "memory") {
 		var rows = 2; 
 		var columns = 4; 
 
-		new ME222WM.apps.MemoryApp(this.appContainer, rows, columns); 
+		new ME222WM.apps.MemoryApp(this.newWindow, rows, columns); 
 	}; 	
+
+	if(this.getWndType() === "largeImg" || this.getWndType() === "veryLargeImg"){
+		ME222WM.apps.ImageViewer.prototype.openLargeImage(this.newWindow, this.imgObject); 
+	}
 }; 
+
+// ME222WM.util.Window.prototype.openLargeImageWindow = function(imgObject){
+	
+
+// 	new this.Window("largeImg"); 
+
+
+// 	var largeImgA = document.createElement("a"); 
+// 	largeImgA.href = "#";
+// 	// this.newWindow.insertBefore(largeImgA, this.newWindow.firstChild.nextSibling);
+
+// 	this.newWindow.appendChild(largeImgA); 
+	
+// 	var largeImg = document.createElement("img"); 
+// 	largeImg.src = imgObject.src; 
+// 	largeImg.width = imgObject.width; 
+// 	largeImg.height = imgObject.height; 
+
+// 	largeImgA.appendChild(largeImg); 
+
+// }; 
+
+
+// ME222WM.apps.ImageViewer.prototype.openLargeImage = function(imgObject){
+    
+//     var largeImgDiv = document.createElement("div"); 
+//     largeImgDiv.className = "largeImgDiv"; 
+//     this.containerDiv.appendChild(largeImgDiv); 
+//     ME222WM.positions.z_index += 1; 
+
+//     largeImgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + ";" + "margin: " + this.y + "px " + this.x + "px;");
+
+//     var largeImg = document.createElement("img"); 
+//     largeImg.src = imgObject.URL; 
+//     largeImg.width = imgObject.width; 
+//     largeImg.height = imgObject.height; 
+
+//     largeImgDiv.appendChild(largeImg); 
+// };

@@ -9,17 +9,24 @@ body{
 	margin: 0;
 	font-family: "Oswald", sans-serif; 
 	min-height: 100%; 
+	background-image: url("../pics/bg-3-full.jpg");
+	background-repeat: no-repeat; 
+	background-size: 100%; 
+}
+
+body .jschanged {
+
 }
 
 #bg{
+	background-image: url("../pics/bg-3-full.jpg");
+	background-repeat: none; 
 	position: fixed;
-	top: -50%;
-	left: -50%;
 	width: 200%;
 	height: 200%;
 }
 
-#bg img{
+/*#bg img{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -28,7 +35,7 @@ body{
 	margin: auto;
 	min-width: 50%;
 	min-height: 50%;
-}
+}*/
 
 #menu{
 	position: absolute;
@@ -68,10 +75,10 @@ a:hover .icon {
 /*Stilegenskaper för alla fönster*/
 .imgWindow, .memWindow, .newWindow {
 	position: absolute;
-	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
+/*	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
 	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
-	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
-	width: 380px;
+	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);*/
+/*	min-width: 380px;*/
 	height: 390px;
 }
 
@@ -136,6 +143,7 @@ a.imgA:hover, a.imgA:focus{
     padding: 15px;
     background: #FFF6D3;
     border: 1px solid black;
+    width: 380px; 
 }
 
 .closeButton{
@@ -179,11 +187,22 @@ a.imgA:hover, a.imgA:focus{
 }
 
 .largeImgDiv{
-	border 1px solid black; 
+	border 5px solid black; 
+	width: 500px; 
+	height: 500px; 
 }
 
-.windowA:focus{
-	border: 5px solid white;
+.windowA{
+	dispay: block;
+}
+
+.largeImg{
+
+}
+
+.largeImgA{
+	display: block; 
+	border: 1px solid black; 
 }
 
 
