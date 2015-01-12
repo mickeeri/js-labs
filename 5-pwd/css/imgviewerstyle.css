@@ -9,22 +9,33 @@ body{
 	margin: 0;
 	font-family: "Oswald", sans-serif; 
 	min-height: 100%; 
+	overflow: none; 
+}
+
+#defaultBody {
 	background-image: url("../pics/bg-3-full.jpg");
 	background-repeat: no-repeat; 
-	background-size: 100%; 
+	background-size: cover; 
 }
 
-body .jschanged {
-
+#bodyJsNoRepeat{
+	background-repeat: no-repeat;
+	background-size: cover; 
 }
 
+#bodyJsRepeat{
+	background-repeat: repeat;
+	background-size: contain; 
+}
+
+/*
 #bg{
 	background-image: url("../pics/bg-3-full.jpg");
 	background-repeat: none; 
 	position: fixed;
 	width: 200%;
 	height: 200%;
-}
+}*/
 
 /*#bg img{
 	position: absolute;
@@ -38,7 +49,7 @@ body .jschanged {
 }*/
 
 #menu{
-	position: absolute;
+	position: fixed;
 	bottom: 0px;
 	width: 100%;
 	background: #3C3934;
@@ -68,25 +79,13 @@ a:hover .icon {
 }
 
 .icon{
-	width: 15%;
+	width: 10%;
 	padding: 4px;
 }
 
 /*Stilegenskaper för alla fönster*/
 .imgWindow, .memWindow, .newWindow {
-	position: absolute;
-/*	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
-	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);
-	box-shadow: 5px 5px 3px rgba(0, 0, 0, .3);*/
-/*	min-width: 380px;*/
-	height: 390px;
-}
-
-.newWindow div:focus{
-	-moz-box-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
-	-webkit-box-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
-	box-shadow: 5px 5px 3px rgba(0, 0, 0, .9);
-	border: 5px solid white;
+	position: fixed;
 }
 
 .imgA{
@@ -121,6 +120,9 @@ a.imgA:hover, a.imgA:focus{
     border-bottom: none; 
     background-repeat: no-repeat;
     padding: 2px;
+    -webkit-box-shadow: inset 7px 9px 31px -10px rgba(158,158,158,1);
+    -moz-box-shadow: inset 7px 9px 31px -10px rgba(158,158,158,1);
+    box-shadow: inset 7px 9px 31px -10px rgba(158,158,158,1);
 }
 
 .windowFooter{
@@ -169,18 +171,21 @@ a.imgA:hover, a.imgA:focus{
 }
 
 .loader{
-    margin-top: 20px;
-}
+	float: left; 
+	padding-left: 5px; 
+	padding-top: 4px; 
+	size: 50%;
 
+}
 .footerP{
 	font-size: 10px; 
 	float: left; 
-	margin: 5px 0 0 4px; 
+	margin: 9px 0 0 4px; 
 }
 
 .headerP{
 	color: white; 
-	margin: 4px 0 0 30px; 
+	margin: 4px 0 0 10px; 
 	font-size: 16px; 
 	float: left;
 	font-weight: bold; 
@@ -203,6 +208,12 @@ a.imgA:hover, a.imgA:focus{
 .largeImgA{
 	display: block; 
 	border: 1px solid black; 
+}
+
+.headerIcon {
+	float: left; 
+	width: 8%; 
+	padding-left: 2px; 
 }
 
 

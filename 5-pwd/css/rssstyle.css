@@ -1,0 +1,39 @@
+.rssDiv {
+	width: 350px; 
+	height: 400px;
+	overflow: auto;  
+	background: white; 
+	border: 1px solid black;
+}
+
+.rssFeed{
+	padding: 12px; 
+	background-color: #FFFBEB;
+}
+
+.rssFeed a {
+	font-size: 11px; 
+}
+
+.rssFeed p {
+	color: black; 
+	font-size: 12px; 
+}
+
+/*Dagens nyheter*/
+.rss_title{
+	color: black;
+	font-size: 15px; 
+	display: block; 
+	background: #C8CED7; 
+	padding: 7px; 
+}
+
+
+
+
+
+
+
+
+

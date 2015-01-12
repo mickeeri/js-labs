@@ -14,10 +14,8 @@ ME222WM.util.Window = function(wndType, imgObject){
 ME222WM.util.Window.prototype.renderWindow = function(){
 	
 	var containerDiv = document.getElementById("container"); 
-	
-	// Göra om denna till en a-tagg istället? 
 	this.newWindow = document.createElement("div"); 
-
+	// Container for whole window is an a-tag. 
 	var windowA = document.createElement("a"); 
 	var headerDiv = document.createElement("div"); 
 	var headerP = document.createElement("p");
@@ -27,6 +25,8 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 
 	this.newWindow.style.zIndex = ME222WM.positions.z_index; 
 
+	windowA.href = "#"; 
+	windowA.className = "windowA"; 
 	this.newWindow.className = "newWindow"; 
 	headerDiv.className = "windowHeader"; 
 	footerDiv.className = "windowFooter"; 
@@ -44,12 +44,8 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 	    this.src = "pics/icons/ic_close_white_18dp.png"; 
 	}; 
 
-	windowA.href = "#"; 
-	windowA.className = "windowA"; 
-
 	containerDiv.appendChild(windowA); 
 	windowA.appendChild(this.newWindow); 
-
 	this.newWindow.appendChild(headerDiv); 
 	headerDiv.appendChild(headerP);
 	headerDiv.appendChild(closeWindowA); 
@@ -72,8 +68,7 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 		}
 		else{
 			
-			// Sets new windows top and left positon previous windows value plus 60 and 40 px. 
-			// This way the new window always is ontop. 
+		 	/*Sets new windows top and left position to previous windows value plus chosen value*/
 			var previousTopPosition = parseInt(newWindows[newWindows.length - 2].style.top); 
 			var previousLeftPosition = parseInt(newWindows[newWindows.length - 2].style.left); 
 
@@ -86,19 +81,54 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 			that.newWindow.style.top = newTopPosition; 
 			that.newWindow.style.left = newLeftPosition; 
 
-			var contentHeight = newWindows[newWindows.length - 2].firstChild.nextSibling.offsetHeight; 
-			var headerHeight = newWindows[newWindows.length - 2].firstChild.offsetHeight; 
-			var footerHeight = newWindows[newWindows.length - 2].lastChild.offsetHeight;
+			setBorder(newWindows, previousTopPosition, previousLeftPosition); 
+		}
+	}
+	function setBorder(newWindows, previousTopPosition, previousLeftPosition){
+		
+		// The size of the actual content of the window. 
+		var contentHeight; 
+		var contentWidth; 
 
-			if(that.getWndType() === "veryLargeImg"){
-				contentHeight = 750; 
-			}
+		var headerHeight = newWindows[newWindows.length - 2].firstChild.offsetHeight; 
+		var footerHeight = newWindows[newWindows.length - 2].lastChild.offsetHeight;
+		var headerWidth = newWindows[newWindows.length - 2].firstChild.offsetWidth; 
+		var footerWidth = newWindows[newWindows.length - 2].firstChild.offsetWidth
+	
+		if(that.getWndType() === "imgViewer"){
+			contentHeight = 432; 
+			contentWidth = 412; 
+		}
+		if(that.getWndType() === "rssReader" || that.getWndType() === "rssReader2"){
+			contentHeight = 410; 
+			contentWidth = 352; 
+		}
+		if(that.getWndType() === "memory"){
+			contentHeight = 412; 
+			contentWidth = 342; 
+		}
+		if(that.getWndType() === "largeImg"){
+			contentHeight = 335; 
+			contentWidth = 335; 
+		}
+		if(that.getWndType() === "veryLargeImg"){
+			contentHeight = 750; 
+			contentWidth = 500; 
+		}
 
-			var prevDivHeight = contentHeight + headerHeight + footerHeight + previousTopPosition; 
+		var maxDivHeight = contentHeight + headerHeight + footerHeight + previousTopPosition; 
+		var maxDivWidth = contentWidth + previousLeftPosition; 
 
-			if(prevDivHeight > document.body.offsetHeight - 100){
-				that.newWindow.style.top = "30px"; 
-			}
+		if(maxDivHeight > document.body.offsetHeight - 60){
+			that.newWindow.style.top = "20px"; 
+		}
+
+		console.log("Maxdivwidth: " + maxDivWidth); 
+		console.log("Body width: " + document.body.offsetWidth); 
+
+
+		if(maxDivWidth > document.body.offsetWidth - 50){
+			that.newWindow.style.left = "20px"; 
 		}
 	}
 
@@ -117,18 +147,39 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 		that.newWindow.style.zIndex = ME222WM.positions.z_index; 
 	});  	
 
-	var height = this.newWindow.offsetHeight + headerDiv.offsetHeight + footerDiv.offsetHeight; 
 	this.startApp(); 
 };
 
 ME222WM.util.Window.prototype.startApp = function(){
 
+	var statusP = document.createElement("p"); 
+	statusP.className = "footerP"; 
+	statusP.innerHTML = "Laddar"; 
+
+	var ajaxLoader = document.createElement("img"); 
+	ajaxLoader.src = "pics/icons/ajax-loader.gif"; 
+	ajaxLoader.alt ="Sidan laddas."; 
+	ajaxLoader.className = "loader"; 
+
+	this.newWindow.lastChild.appendChild(ajaxLoader); 
+	this.newWindow.lastChild.appendChild(statusP); 
+	
+
 	if(this.getWndType() === "imgViewer") {
 		new ME222WM.apps.ImageViewer(this.newWindow, new Date()); 
 	};
 
+	if(this.getWndType() === "rssReader") {
+		var myRSS = new ME222WM.apps.RssReader(this.newWindow, "http://www.dn.se/nyheter/m/rss/"); 
+		console.log(myRSS.offsetWidth); 
+	}
+
+	if(this.getWndType() === "rssReader2"){
+		new ME222WM.apps.RssReader(this.newWindow, "http://feeds.idg.se/idg/vzzs"); 
+	}
+
 	if(this.getWndType() === "memory") {
-		var rows = 2; 
+		var rows = 4; 
 		var columns = 4; 
 
 		new ME222WM.apps.MemoryApp(this.newWindow, rows, columns); 
@@ -139,41 +190,9 @@ ME222WM.util.Window.prototype.startApp = function(){
 	}
 }; 
 
-// ME222WM.util.Window.prototype.openLargeImageWindow = function(imgObject){
+ME222WM.util.Window.prototype.appendNewWindow = function(contentDiv) {
+
 	
 
-// 	new this.Window("largeImg"); 
 
-
-// 	var largeImgA = document.createElement("a"); 
-// 	largeImgA.href = "#";
-// 	// this.newWindow.insertBefore(largeImgA, this.newWindow.firstChild.nextSibling);
-
-// 	this.newWindow.appendChild(largeImgA); 
-	
-// 	var largeImg = document.createElement("img"); 
-// 	largeImg.src = imgObject.src; 
-// 	largeImg.width = imgObject.width; 
-// 	largeImg.height = imgObject.height; 
-
-// 	largeImgA.appendChild(largeImg); 
-
-// }; 
-
-
-// ME222WM.apps.ImageViewer.prototype.openLargeImage = function(imgObject){
-    
-//     var largeImgDiv = document.createElement("div"); 
-//     largeImgDiv.className = "largeImgDiv"; 
-//     this.containerDiv.appendChild(largeImgDiv); 
-//     ME222WM.positions.z_index += 1; 
-
-//     largeImgDiv.setAttribute("style", "z-index: " + ME222WM.util.launch.zIndex + ";" + "margin: " + this.y + "px " + this.x + "px;");
-
-//     var largeImg = document.createElement("img"); 
-//     largeImg.src = imgObject.URL; 
-//     largeImg.width = imgObject.width; 
-//     largeImg.height = imgObject.height; 
-
-//     largeImgDiv.appendChild(largeImg); 
-// };
+}; 

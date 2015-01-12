@@ -10,22 +10,23 @@ ME222WM.apps.ImageViewer = function(imgViewerDiv, startTime){
     this.imgContainer.className = "imgContainer";
     imgViewerDiv.insertBefore(this.imgContainer, imgViewerDiv.firstChild.nextSibling); 
 
-    this.ajaxLoader = document.createElement("img");
-    this.ajaxLoader.src = "pics/icons/ajax-loader.gif";
-    this.ajaxLoader.alt = "Sidan laddas.";
-    this.ajaxLoader.className = "loader";
-    this.imgContainer.appendChild(this.ajaxLoader);
+    var header = imgViewerDiv.firstChild;
+    var headerIcon = document.createElement("img"); 
+    headerIcon.src = "pics/icons/1420313406_Toolbar_Images.png"; 
+    headerIcon.className = "headerIcon"; 
 
-    var header = imgViewerDiv.firstChild; 
     this.footer = imgViewerDiv.lastChild; 
     header.firstChild.innerHTML = "Image Viewer"; 
+
+    header.insertBefore(headerIcon, header.firstChild);
+
+    this.ajaxLoader = this.footer.firstChild; 
+    this.statusP = this.footer.lastChild; 
 
     this.getImages();
 };
 
 ME222WM.apps.ImageViewer.prototype.getImages = function(){
-
-    this.counter = 0;
 
     var url = "http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/";
 
@@ -38,14 +39,16 @@ ME222WM.apps.ImageViewer.prototype.getImages = function(){
 
         if(xhr.readyState === 4 && xhr.status === 200){
 
-            // Remove loader when pictures are loaded.
-            that.imgContainer.removeChild(that.ajaxLoader);
-
             var imageArray = JSON.parse(xhr.responseText);
 
             that.renderImages(imageArray);
 
             var endTime = new Date();
+
+            // Remove loader and status when pictures are loaded.
+            that.footer.removeChild(that.ajaxLoader);
+            that.statusP.innerHTML = ""; 
+
 
             that.timeAjaxLoad(imageArray, endTime);
         }
@@ -134,13 +137,11 @@ ME222WM.apps.ImageViewer.prototype.calculateSize = function(images){
 };
 
 ME222WM.apps.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
-    var statusP = document.createElement("p"); 
-    statusP.className = "footerP"; 
 
     var loadTime = endTime.getTime() - this.getStartTime().getTime() + " ms";
 
-    statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
-    this.footer.appendChild(statusP); 
+    this.statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
+    this.footer.appendChild(this.statusP); 
 }; 
 
 
@@ -156,51 +157,39 @@ ME222WM.apps.ImageViewer.prototype.openLargeImage = function(largeImgDiv, imgObj
      
     var largeImg = document.createElement("img"); 
     largeImg.src = imgObject.URL; 
-    // largeImg.width = imgObject.width; 
-    // largeImg.height = imgObject.height;
     largeImg.className = "largeImg"; 
-
-    // ME222WM.positions.z_index += 1; 
 
     largeImgA.appendChild(largeImg); 
 
-
-    // largeImgDiv.style.zIndex = 10; 
     largeImgDiv.insertBefore(largeImgA, largeImgDiv.firstChild.nextSibling); 
 
-    console.log(imgObject); 
+    function changeBackground(){
+        var infoP = document.createElement("p"); 
+        infoP.innerHTML = "Klicka på bilden för att göra den till bakgrundsbild. För original ";
+        infoP.className = "footerP";  
+        var defaultBackgroundA = document.createElement("a");
+        defaultBackgroundA.innerHTML = "klicka här"; 
+        defaultBackgroundA.href = "#"; 
 
-    var infoP = document.createElement("p"); 
-    infoP.innerHTML = "Klicka på bilden för att göra den till bakgrundsbild. För original ";
-    infoP.className = "footerP";  
-    var defaultBackgroundA = document.createElement("a");
-    defaultBackgroundA.innerHTML = "klicka här"; 
-    defaultBackgroundA.href = "#"; 
+        infoP.appendChild(defaultBackgroundA);
+        largeImgDiv.lastChild.appendChild(infoP); 
 
+        largeImgA.addEventListener("click", function(){
+            document.body.style.backgroundImage = "url('" + imgObject.URL + "')"; 
+            // document.body.style.backgroundRepeat = "no-repeat"; 
+            if(imgObject.height > 400){       
+                document.body.id = "bodyJsRepeat"; 
+            }
+            else {
+                document.body.id = "bodyJsNoRepeat"; 
+            }
+        }); 
 
-    infoP.appendChild(defaultBackgroundA);
-    largeImgDiv.lastChild.appendChild(infoP); 
-
-    console.log(largeImgDiv.lastChild); 
-
-
-    largeImgA.addEventListener("click", function(){
-        document.body.style.backgroundImage = "url('" + imgObject.URL + "')"; 
-        // document.body.style.backgroundRepeat = "no-repeat"; 
-        if(imgObject.height > 400){
-            document.body.style.backgroundRepeat = "repeat"; 
-            document.body.style.backgroundSize = "contain";   
-        }
-        else {
-            document.body.style.backgroundRepeat = "no-repeat"; 
-            document.body.style.backgroundSize = "100%"; 
-        }
-    }); 
-
-    defaultBackgroundA.addEventListener("click", function(e){
-        document.body.style.backgroundImage = "url('pics/bg-3-full.jpg')"; 
-        document.body.style.backgroundRepeat = "no-repeat"; 
-    }); 
+        defaultBackgroundA.addEventListener("click", function(e){        
+            document.body.id = "defaultBody"; 
+            document.body.style.backgroundImage = ""; 
+        }); 
+    }
 }; 
 
 
