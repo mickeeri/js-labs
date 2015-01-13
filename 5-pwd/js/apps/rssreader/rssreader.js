@@ -10,7 +10,7 @@ ME222WM.apps.RssReader = function(newWindow, url){
 	this.getFeed(url);
 
     return this.rssDiv; 
-}
+};
 
 ME222WM.apps.RssReader.prototype.getFeed = function(url){
     var that = this; 
@@ -23,13 +23,23 @@ ME222WM.apps.RssReader.prototype.getFeed = function(url){
         if(xhr.readyState === 4 && xhr.status === 200){
             that.rssDiv.innerHTML = xhr.responseText; 
 
-           var lastUpdate = new Date().getHours() + ":" +  new Date().getMinutes(); // Måste skrivas med 0 framför. 
+            var now = new Date(); 
+            var lastUpdate = addLeadingZero(now.getHours()) + ":" +  addLeadingZero(now.getMinutes());  
 
             that.newWindow.footerDiv.removeChild(that.newWindow.ajaxLoader); 
             that.newWindow.statusP.innerHTML = ""; 
             that.newWindow.statusP.innerHTML = "Senast uppdaterad " + lastUpdate; 
         }
+    };
+
+function addLeadingZero(value){
+    if(value < 10){
+        return "0" + value; 
     }
+    else {
+        return value; 
+    }
+}
 
     xhr.send(null);
-}
+};

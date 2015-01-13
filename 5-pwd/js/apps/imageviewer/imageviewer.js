@@ -77,19 +77,16 @@ ME222WM.apps.ImageViewer.prototype.renderImage = function(image, index){
 
     var that = this; 
 
-    this.imgAtag.addEventListener("click", function(e){
+    this.imgAtag.addEventListener("mouseup", function(e){
+        if(e.button === 0){
+            new ME222WM.util.Window("largeImg", image);  
+        }
+        // Ability to change background image on right mouse button click. 
+        if(e.button === 2){
+            document.body.style.backgroundImage = "url('" + image.URL + "')";
+            document.body.id = "bodyJsRepeat"; 
+        }
         
-        var imgType; 
-
-        if(image.height > 400){
-            imgType = "veryLargeImg"; 
-        }
-        else{
-            imgType = "largeImg"; 
-        }
-
-        // Clicking thumbnail opens method openImage that takes img object as parameter. 
-        new ME222WM.util.Window(imgType, image);  
     }); 
 };
 
@@ -110,7 +107,7 @@ ME222WM.apps.ImageViewer.prototype.calculateSize = function(images){
         return 0;
     });
 
-    this.maxHeight = sortedArray[0].thumbHeight;
+    this.maxHeight = sortedArray[sortedArray.length - 1].thumbHeight;
 
     // Calculating largest width
     sortedArray.sort(function(a, b) {
@@ -123,6 +120,7 @@ ME222WM.apps.ImageViewer.prototype.calculateSize = function(images){
         // a is equal to b
         return 0;
     });
+    
     this.maxWidth = sortedArray[sortedArray.length - 1].thumbWidth;
 };
 
@@ -134,52 +132,7 @@ ME222WM.apps.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
 }; 
 
 
-ME222WM.apps.ImageViewer.prototype.openLargeImage = function(largeImgDiv, imgObject){
 
-
-    var largeImgA = document.createElement("a"); 
-    largeImgA.href = "#";
-    largeImgA.className = "largeImgA"; 
-
-    largeImgA.style.height = imgObject.height + "px"; 
-    largeImgA.style.width = imgObject.width + "px"; 
-     
-    var largeImg = document.createElement("img"); 
-    largeImg.src = imgObject.URL; 
-    largeImg.className = "largeImg"; 
-
-    largeImgA.appendChild(largeImg); 
-
-    largeImgDiv.insertBefore(largeImgA, largeImgDiv.firstChild.nextSibling); 
-
-    function changeBackground(){
-        var infoP = document.createElement("p"); 
-        infoP.innerHTML = "Klicka på bilden för att göra den till bakgrundsbild. För original ";
-        infoP.className = "footerP";  
-        var defaultBackgroundA = document.createElement("a");
-        defaultBackgroundA.innerHTML = "klicka här"; 
-        defaultBackgroundA.href = "#"; 
-
-        infoP.appendChild(defaultBackgroundA);
-        largeImgDiv.lastChild.appendChild(infoP); 
-
-        largeImgA.addEventListener("click", function(){
-            document.body.style.backgroundImage = "url('" + imgObject.URL + "')"; 
-            // document.body.style.backgroundRepeat = "no-repeat"; 
-            if(imgObject.height > 400){       
-                document.body.id = "bodyJsRepeat"; 
-            }
-            else {
-                document.body.id = "bodyJsNoRepeat"; 
-            }
-        }); 
-
-        defaultBackgroundA.addEventListener("click", function(e){        
-            document.body.id = "defaultBody"; 
-            document.body.style.backgroundImage = ""; 
-        }); 
-    }
-}; 
 
 
 

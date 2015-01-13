@@ -25,28 +25,7 @@ body{
 
 #bodyJsRepeat{
 	background-repeat: repeat;
-	background-size: contain; 
 }
-
-/*
-#bg{
-	background-image: url("../pics/bg-3-full.jpg");
-	background-repeat: none; 
-	position: fixed;
-	width: 200%;
-	height: 200%;
-}*/
-
-/*#bg img{
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: auto;
-	min-width: 50%;
-	min-height: 50%;
-}*/
 
 #menu{
 	position: fixed;
@@ -83,9 +62,9 @@ a:hover .icon {
 	padding: 4px;
 }
 
-/*Stilegenskaper för alla fönster*/
-.imgWindow, .memWindow, .newWindow {
+.newWindow {
 	position: fixed;
+	cursor: pointer;
 }
 
 .imgA{
@@ -100,6 +79,11 @@ a:hover .icon {
     border: 1px solid #6F809A;
 }
 
+.thumbnails { 
+	margin-top: 50%; 
+	transform: translateY(-55%); 
+}
+
 a.imgA:hover, a.imgA:focus{
     -webkit-transform: scale(1.2);
 	-moz-transform: scale(1.2);
@@ -111,14 +95,14 @@ a.imgA:hover, a.imgA:focus{
 
 .windowHeader{
     /*background-image: linear-gradient(#000D0B, #20263A);*/
-
+	background-color: #282828;
     background-image: -webkit-gradient(linear,left top,left bottom,from(#282828),to(#191919));
     background-image: -webkit-linear-gradient(top,#282828,#191919);
     background-image: linear-gradient(top,#282828,#191919);
     height: 56px;
     border: 1px solid black; 
     border-bottom: none; 
-    background-repeat: no-repeat;
+    background-repeat: repeat-x;
     padding: 2px;
     -webkit-box-shadow: inset 7px 9px 31px -10px rgba(158,158,158,1);
     -moz-box-shadow: inset 7px 9px 31px -10px rgba(158,158,158,1);
@@ -126,6 +110,7 @@ a.imgA:hover, a.imgA:focus{
 }
 
 .windowFooter{
+	background-color: #282828;
     height: 26px;
     /*background-image: linear-gradient(#20263A, #000D0B);*/
     border: 1px solid black; 
@@ -145,7 +130,7 @@ a.imgA:hover, a.imgA:focus{
     padding: 15px;
     background: #FFF6D3;
     border: 1px solid black;
-    width: 380px; 
+    width: 400px; 
 }
 
 .closeButton{
@@ -180,7 +165,8 @@ a.imgA:hover, a.imgA:focus{
 .footerP{
 	font-size: 10px; 
 	float: left; 
-	margin: 9px 0 0 4px; 
+	margin: 9px 0 8px 4px; 
+	color: white;
 }
 
 .headerP{
@@ -215,7 +201,3 @@ a.imgA:hover, a.imgA:focus{
 	width: 8%; 
 	padding-left: 2px; 
 }
-
-
-
-

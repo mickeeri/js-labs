@@ -6,22 +6,19 @@ ME222WM.apps = ME222WM.apps || {};
 
 ME222WM.positions = {
     z_index: 1
-}
+}; 
 
 ME222WM.util.init = function(){
     ME222WM.util.launchApps(); 
  };
 
+// Creates window and application based on which icon is clicked. 
 ME222WM.util.launchApps = function() {
     // Links to open windows/apps. 
     var imgViewerIcon = document.getElementById("imageviewer");
     var rssIcon = document.getElementById("rssfeed"); 
     var rssIcon2 = document.getElementById("rssfeed2"); 
     var memoryIcon = document.getElementById("memory"); 
-    
-    // var containerDiv = document.getElementById("container");
-
-    var that = this; 
 
     imgViewerIcon.addEventListener("click", function(e){
 

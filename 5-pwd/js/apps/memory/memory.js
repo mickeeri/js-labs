@@ -24,23 +24,7 @@ ME222WM.apps.MemoryApp = function(newWindow, rows, columns) {
 	gameOn.innerHTML = "Game On";  
 	doc.game.insertBefore(gameOn, doc.game.firstChild); 
 
-	// var header = memoryDiv.firstChild; 
-	// header.firstChild.innerHTML = "Memory";  
-
-	// var headerIcon = document.createElement("img"); 
-	// headerIcon.src = "pics/icons/1420585292_Game_Center.png"; 
-	// headerIcon.className = "headerIcon"; 
-
-	// header.insertBefore(headerIcon, header.firstChild); 
-
-	// Remove loader and status. 
-	// memoryDiv.lastChild.innerHTML = ""; 
-
-	//newWindow.lastChild.innerHTML = ""; 
-
 	newWindow.footerDiv.innerHTML = ""; 
-
-	console.log(newWindow); 
 
 	createTable();
 
@@ -134,10 +118,6 @@ ME222WM.apps.MemoryApp = function(newWindow, rows, columns) {
 		result.innerHTML = "Grattis! Spelet är slut. Du behövde " + doc.numberOfTries + " försök för att lyckas.";
 
 		doc.game.appendChild(result);
-
-		console.log(doc.game); 
-
-		
 	}
 
 	return doc.game; 
