@@ -17,20 +17,21 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 	this.newWindow = document.createElement("div"); 
 	// Container for whole window is an a-tag. 
 	var windowA = document.createElement("a"); 
-	var headerDiv = document.createElement("div"); 
-	var headerP = document.createElement("p");
+	this.headerDiv = document.createElement("div"); 
+	this.headerP = document.createElement("h2");
 	var closeWindowA = document.createElement("a"); 
 	var closeButton = document.createElement("img"); 
-	var footerDiv = document.createElement("div");
+	this.footerDiv = document.createElement("div");
+	this.statusP = document.createElement("p");
 
 	this.newWindow.style.zIndex = ME222WM.positions.z_index; 
 
 	windowA.href = "#"; 
 	windowA.className = "windowA"; 
 	this.newWindow.className = "newWindow"; 
-	headerDiv.className = "windowHeader"; 
-	footerDiv.className = "windowFooter"; 
-	headerP.className = "headerP";
+	this.headerDiv.className = "windowHeader"; 
+	this.footerDiv.className = "windowFooter"; 
+	this.headerP.className = "headerP";
 	closeWindowA.href = "#"; 
 	closeWindowA.className = "closeA"; 
 
@@ -46,11 +47,11 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 
 	containerDiv.appendChild(windowA); 
 	windowA.appendChild(this.newWindow); 
-	this.newWindow.appendChild(headerDiv); 
-	headerDiv.appendChild(headerP);
-	headerDiv.appendChild(closeWindowA); 
+	this.newWindow.appendChild(this.headerDiv); 
+	this.headerDiv.appendChild(this.headerP);
+	this.headerDiv.appendChild(closeWindowA); 
 	closeWindowA.appendChild(closeButton);
-	this.newWindow.appendChild(footerDiv); 
+	this.newWindow.appendChild(this.footerDiv); 
 
 	var that = this;
 
@@ -152,26 +153,38 @@ ME222WM.util.Window.prototype.renderWindow = function(){
 
 ME222WM.util.Window.prototype.startApp = function(){
 
-	var statusP = document.createElement("p"); 
-	statusP.className = "footerP"; 
-	statusP.innerHTML = "Laddar"; 
+	var headerIcon = document.createElement("img"); 
+	headerIcon.className = "headerIcon"; 
 
-	var ajaxLoader = document.createElement("img"); 
-	ajaxLoader.src = "pics/icons/ajax-loader.gif"; 
-	ajaxLoader.alt ="Sidan laddas."; 
-	ajaxLoader.className = "loader"; 
+	this.statusP.className = "footerP"; 
+	this.statusP.innerHTML = "Laddar"; 
 
-	this.newWindow.lastChild.appendChild(ajaxLoader); 
-	this.newWindow.lastChild.appendChild(statusP); 
-	
+	this.ajaxLoader = document.createElement("img"); 
+	this.ajaxLoader.src = "pics/icons/ajax-loader.gif"; 
+	this.ajaxLoader.alt ="Sidan laddas."; 
+	this.ajaxLoader.className = "loader"; 
+
+	this.footerDiv.appendChild(this.ajaxLoader); 
+	this.footerDiv.appendChild(this.statusP);  
+	this.headerDiv.insertBefore(headerIcon, this.headerDiv.firstChild); 
 
 	if(this.getWndType() === "imgViewer") {
-		new ME222WM.apps.ImageViewer(this.newWindow, new Date()); 
+		headerIcon.src = "pics/icons/1420313406_Toolbar_Images.png"; 
+		this.headerP.innerHTML = "Image Viewer"; 
+
+		var myImgViewer = new ME222WM.apps.ImageViewer(this, new Date()); 
+
+		this.appendNewWindow(myImgViewer); 
 	};
 
 	if(this.getWndType() === "rssReader") {
-		var myRSS = new ME222WM.apps.RssReader(this.newWindow, "http://www.dn.se/nyheter/m/rss/"); 
-		console.log(myRSS.offsetWidth); 
+		
+		headerIcon.src = "pics/icons/1420314949_rss_circle_color-128.png"; 
+		this.headerP.innerHTML = "RSS Reader"; 
+
+		var myRSS = new ME222WM.apps.RssReader(this, "http://www.dn.se/nyheter/m/rss/");
+
+		this.appendNewWindow(myRSS); 
 	}
 
 	if(this.getWndType() === "rssReader2"){
@@ -182,7 +195,13 @@ ME222WM.util.Window.prototype.startApp = function(){
 		var rows = 4; 
 		var columns = 4; 
 
-		new ME222WM.apps.MemoryApp(this.newWindow, rows, columns); 
+		headerIcon.src = "pics/icons/1420585292_Game_Center.png";
+		this.headerP.innerHTML = "Memory"; 
+
+
+		var myMemory = ME222WM.apps.MemoryApp(this, rows, columns); 
+
+		this.appendNewWindow(myMemory); 
 	}; 	
 
 	if(this.getWndType() === "largeImg" || this.getWndType() === "veryLargeImg"){
@@ -191,8 +210,12 @@ ME222WM.util.Window.prototype.startApp = function(){
 }; 
 
 ME222WM.util.Window.prototype.appendNewWindow = function(contentDiv) {
-
 	
+	// Här kontrollerar jag senare att den inte är för bred/hög. 
+
+	this.newWindow.insertBefore(contentDiv, this.newWindow.firstChild.nextSibling);  
+
+
 
 
 }; 

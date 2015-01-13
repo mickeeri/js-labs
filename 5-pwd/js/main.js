@@ -19,7 +19,7 @@ ME222WM.util.launchApps = function() {
     var rssIcon2 = document.getElementById("rssfeed2"); 
     var memoryIcon = document.getElementById("memory"); 
     
-    var containerDiv = document.getElementById("container");
+    // var containerDiv = document.getElementById("container");
 
     var that = this; 
 

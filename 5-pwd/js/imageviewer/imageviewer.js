@@ -1,29 +1,19 @@
 "use strict";
 
-ME222WM.apps.ImageViewer = function(imgViewerDiv, startTime){
+ME222WM.apps.ImageViewer = function(newWindow, startTime){
 
     this.getStartTime = function(){
         return startTime; 
     };
 
+    this.newWindow = newWindow; 
+
     this.imgContainer = document.createElement("div");
     this.imgContainer.className = "imgContainer";
-    imgViewerDiv.insertBefore(this.imgContainer, imgViewerDiv.firstChild.nextSibling); 
-
-    var header = imgViewerDiv.firstChild;
-    var headerIcon = document.createElement("img"); 
-    headerIcon.src = "pics/icons/1420313406_Toolbar_Images.png"; 
-    headerIcon.className = "headerIcon"; 
-
-    this.footer = imgViewerDiv.lastChild; 
-    header.firstChild.innerHTML = "Image Viewer"; 
-
-    header.insertBefore(headerIcon, header.firstChild);
-
-    this.ajaxLoader = this.footer.firstChild; 
-    this.statusP = this.footer.lastChild; 
 
     this.getImages();
+
+    return this.imgContainer; 
 };
 
 ME222WM.apps.ImageViewer.prototype.getImages = function(){
@@ -46,10 +36,10 @@ ME222WM.apps.ImageViewer.prototype.getImages = function(){
             var endTime = new Date();
 
             // Remove loader and status when pictures are loaded.
-            that.footer.removeChild(that.ajaxLoader);
-            that.statusP.innerHTML = ""; 
+            
+            that.newWindow.statusP.innerHTML = ""; 
 
-
+            that.newWindow.footerDiv.removeChild(that.newWindow.ajaxLoader);
             that.timeAjaxLoad(imageArray, endTime);
         }
     };
@@ -140,8 +130,7 @@ ME222WM.apps.ImageViewer.prototype.timeAjaxLoad = function(images, endTime){
 
     var loadTime = endTime.getTime() - this.getStartTime().getTime() + " ms";
 
-    this.statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
-    this.footer.appendChild(this.statusP); 
+    this.newWindow.statusP.innerHTML = images.length + " bilder laddades på " + loadTime;
 }; 
 
 
